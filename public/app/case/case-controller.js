@@ -1,6 +1,7 @@
-app.controller('caseCtrl', function($scope) {
-	$scope.saleShows = window.saleShows;
-	console.log($scope.saleShows);
+app.controller('caseCtrl', function($scope, myService) {
+	myService.getAnlis().then(function(soldCases) {
+        $scope.saleShows = soldCases;
+    });;
 });
 
 app.controller('caseDetailCtrl', function($scope, $routeParams) {
