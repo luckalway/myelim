@@ -1,11 +1,10 @@
-app.controller('homeCtrl', function($scope, myService) {
-	myService.getAnlis().then(function(soldCases) {
-    	if (soldCases.length > 4) {
-    		$scope.customerCases = soldCases.slice(0, 4);
-    	} else {
-    		$scope.customerCases = soldCases;
-    	}
-    });
+app.controller('homeCtrl', function($scope, soldCasesFactory) {
+	var soldCases =  soldCasesFactory.query();
+	if (soldCases.length > 4) {
+		$scope.customerCases = soldCases.slice(0, 4);
+	} else {
+		$scope.customerCases = soldCases;
+	}
 }).directive("advantageSection", function() {
 	return {
 		restrict : "AEC",

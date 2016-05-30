@@ -1,4 +1,4 @@
-var app = angular.module('elimApp', [ 'ngRoute' ]);
+var app = angular.module('elimApp', [ 'ngRoute', 'ngResource']);
 
 app.config(function($routeProvider) {
 	$routeProvider.when('/buyi', {

@@ -1,7 +1,5 @@
-app.controller('caseCtrl', function($scope, myService) {
-	myService.getAnlis().then(function(soldCases) {
-        $scope.saleShows = soldCases;
-    });;
+app.controller('caseCtrl', function($scope, soldCasesFactory) {
+	$scope.saleShows = soldCasesFactory.query();
 });
 
 app.controller('caseDetailCtrl', function($scope, $routeParams) {
