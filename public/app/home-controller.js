@@ -5,6 +5,7 @@ app.controller('homeCtrl', function($scope, soldCasesFactory) {
 	} else {
 		$scope.customerCases = soldCases;
 	}
+	console.log($scope.customerCases);
 }).directive("advantageSection", function() {
 	return {
 		restrict : "AEC",

@@ -31,6 +31,15 @@ router.get('/sold-cases', function(req, res, next) {
 	});
 });
 
+router.get('/sold-cases/:id', function(req, res, next) {
+	db.get(req.params.id, {
+		revs_info : true
+	}, function(err, body) {
+		res.send(body);
+		res.status(200).end();
+	});
+});
+
 router.post('/sold-cases', function(req, res, next) {
 	upload(req, res, function(err) {
 		var soldCase = {
@@ -44,10 +53,11 @@ router.post('/sold-cases', function(req, res, next) {
 
 		for (var i = 0; i < req.files.length; i++) {
 			var file = req.files[i];
+			var imageURL = path.join("/data/sold-show/images",file.filename);
 			if (file.originalname.indexOf("preivew") == -1) {
-				soldCase.images.push(file.path);
+				soldCase.images.push(imageURL);
 			} else {
-				soldCase.preview = file.path;
+				soldCase.preview = imageURL;
 			}
 		}
 
