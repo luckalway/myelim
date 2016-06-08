@@ -7,5 +7,4 @@ app.controller('caseDetailCtrl', function($scope, $routeParams, soldCaseFactory)
 	$scope.caseItem = soldCaseFactory.get({
 		id : $scope.itemId
 	});
-	console.log($scope.caseItem);
 });

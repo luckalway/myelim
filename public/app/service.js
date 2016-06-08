@@ -10,6 +10,15 @@ app.factory('soldCasesFactory', function($resource) {
 	})
 });
 
+app.factory('soldCasesFolderFactory', function($resource) {
+	return $resource('/api/sold-cases/folder', {}, {
+		query : {
+			method : 'GET',
+			isArray : true
+		}
+	})
+});
+
 app.factory('soldCaseFactory', function($resource) {
 	return $resource('/api/sold-cases/:id', {}, {
 		get : {

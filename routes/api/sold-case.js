@@ -1,23 +1,13 @@
 var express = require('express');
 var multer = require('multer');
 var path = require('path');
+var fs = require("fs");
+const url = require('url');
 
 var nano = require('nano')('http://114.215.185.21:5984');
 var db = nano.db.use('vmeifang');
 
 var router = express.Router();
-var storage = multer.diskStorage({
-	destination : path.join(global.ROOT_PATH, '/public/data/sold-show/images/'),
-	filename : function(req, file, cb) {
-		var format = require('date-format');
-		format.asString(new Date());
-		cb(null, format("yyyyMMddhhmmssSSS") + ".jpg");
-	}
-})
-
-var upload = multer({
-	storage : storage
-}).any();
 
 router.get('/sold-cases', function(req, res, next) {
 	db.view("sold_cases", "sold_cases", function(err, body) {
@@ -31,6 +21,11 @@ router.get('/sold-cases', function(req, res, next) {
 	});
 });
 
+router.get('/sold-cases/folder', function(req, res, next) {
+	var soldCases = fs.readdirSync(path.join(global.ROOT_PATH, '/public/data/sold-show/'));
+	res.send(soldCases);
+});
+
 router.get('/sold-cases/:id', function(req, res, next) {
 	db.get(req.params.id, {
 		revs_info : true
@@ -41,33 +36,29 @@ router.get('/sold-cases/:id', function(req, res, next) {
 });
 
 router.post('/sold-cases', function(req, res, next) {
-	upload(req, res, function(err) {
-		var soldCase = {
-			id : req.body.id,
-			area : req.body.area,
-			garden : req.body.garden,
-			images : [],
-			preview : null,
-			type : "anli"
-		};
-
-		for (var i = 0; i < req.files.length; i++) {
-			var file = req.files[i];
-			var imageURL = path.join("/data/sold-show/images",file.filename);
-			if (file.originalname.indexOf("preivew") == -1) {
-				soldCase.images.push(imageURL);
-			} else {
-				soldCase.preview = imageURL;
-			}
+	var regexp =  new RegExp('[0-9]+\.jpg');
+	var folderPath = path.join(global.ROOT_PATH, '/public/data/sold-show/', req.body.imageFolder);
+	var allImages = fs.readdirSync(folderPath);
+	var images = [];
+	var baseUrl = url.resolve('/data/sold-show/', req.body.imageFolder);
+	allImages.forEach(function(image){
+		if(/^[0-9]+\.jpg$/.exec(image)){
+			images.push(baseUrl+"/"+image);
 		}
-
-		if (!soldCase.preview) {
-			soldCase.preview = soldCase.images[0];
-		}
-
-		db.insert(soldCase);
 	});
-	res.status(204).end();
+	
+	var soldCase = {
+		id : req.body.imageFolder,
+		area : req.body.area,
+		garden : req.body.garden,
+		date : req.body.date,
+		images : images,
+		preview : baseUrl+"/preview.jpg",
+		type : "anli"
+	};
+
+	db.insert(soldCase);
+	res.redirect('/malachiye#/admin');
 });
 
 router.delete("/sold-cases/:id", function(req, res, next) {

@@ -29,24 +29,29 @@
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 					<h4 class="modal-title" id="sold-case-model-label">案例-添加/修改</h4>
 				</div>
-				<form role="form" action="/api/sold-cases" method="POST" enctype="multipart/form-data">
+				<form role="form" action="/api/sold-cases" method="POST">
 					<div class="modal-body">
 						<div class="form-group">
-							<label for="name">编号</label> <input type="text" class="form-control" id="id" name="id" placeholder="请输入编号" required>
-						</div>					
-						<div class="form-group">
-							<label for="name">区域</label> <input type="text" class="form-control" id="area" name="area" placeholder="请输入区域" required>
+							<label for="name">日期</label> <input type="text" class="form-control" id="date" name="date" placeholder="请输入日期"
+								required readonly>
 						</div>
 						<div class="form-group">
-							<label for="name">小区</label> <input type="text" class="form-control" id="area" name="garden" placeholder="请输入小区名称" required>
+							<label for="name">区域</label> <input type="text" class="form-control" id="area" name="area" placeholder="请输入区域"
+								required>
 						</div>
 						<div class="form-group">
-							<label for="inputfile">案例图片</label> <input type="file" name="image" id="inputfile" multiple>
+							<label for="name">小区</label> <input type="text" class="form-control" id="area" name="garden"
+								placeholder="请输入小区名称" required>
+						</div>
+						<div class="form-group">
+							<label for="name">编号</label> <select class="form-control" id="imageFolder" name="imageFolder"
+								placeholder="请输入图片目录编号" required><option value="">Select One</option>
+								<option ng-repeat="folderName in folders" value="{{folderName}}">{{folderName}}</option></select>
 						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-						<input type="submit" class="btn btn-primary" value="提交更改" ng-click="refreshPage()"></input>
+						<button type="submit" class="btn btn-primary" value="提交更改">提交更改</button>
 					</div>
 				</form>
 			</div>
