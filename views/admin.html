@@ -14,10 +14,24 @@
 <script src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script src="framework/bootstrap/datepicker/bootstrap-datetimepicker.min.js"></script>
 <script src="app/admin/admin-app.js" type="text/javascript"></script>
+<script src="app/admin/anli/anli-controller.js" type="text/javascript"></script>
+<script src="app/admin/peijian/peijian-controller.js" type="text/javascript"></script>
 <script src="app/service.js" type="text/javascript"></script>
 <script src="app/directive.js" type="text/javascript"></script>
 </head>
 <body ng-app="adminApp">
+	<nav class="navbar navbar-default">
+		<nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0px;">
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="#/anli">成功案例</a></li>
+					<li><a href="#/peijian">窗帘配件</a></li>
+				</ul>
+			</div>
+		</nav>
+	</nav>
+
+
 	<ng-view></ng-view>
 </body>
 </html>

@@ -1,0 +1,55 @@
+<div class="admin" ng-controller="peijianCtrl">
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>货号</th>
+				<th>价格</th>
+				<th>计价单位</th>
+				<th><button class="btn btn-primary" data-toggle="modal" data-target="#peijian-model">添加</button></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="item in peijians">
+				<td>{{item.productId}}</td>
+				<td>{{item.price}}</td>
+				<td>{{item.unit}}</td>
+				<td><a ng-click="deleteItem(item._id,item._rev)" class="btn btn-small btn-danger">删除</a></td>
+			</tr>
+		</tbody>
+	</table>
+
+
+	<div class="modal fade" id="peijian-model" tabindex="-1" role="dialog" aria-labelledby="peijian-model-label"
+		aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<h4 class="modal-title" id="peijian-model-label">配件-添加/修改</h4>
+				</div>
+				<form role="form" action="/api/sold-cases" method="POST">
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="name">货号</label> <select class="form-control" id="productId" name="productId" required><option
+									value="">请选择货号</option>
+								<option ng-repeat="folderName in folders" value="{{folderName}}">{{folderName}}</option></select>
+						</div>
+						<div class="form-group">
+							<label for="name">价格</label> <input type="text" class="form-control" id="price" name="price" placeholder="请输入价格"
+								required readonly>
+						</div>
+						<div class="form-group">
+							<label for="name">计价单位</label> <select class="form-control" id="unit" name="unit" required><option
+									value="">请选择计价单位</option>
+								<option value="permeter">元/米</option></select>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="submit" class="btn btn-primary" value="提交更改">提交更改</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

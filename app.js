@@ -7,9 +7,12 @@ var bodyParser = require('body-parser');
 var ejs = require('ejs');
 
 global.ROOT_PATH =  __dirname;
+global.nano = require('nano')('http://114.215.185.21:5984');
+global.db = nano.db.use('vmeifang');
 
 var routes = require('./routes/index');
-var serviceRoutes = require('./routes/api/sold-case.js');
+var anliRoutes = require('./routes/api/sold-case.js');
+var peijianRoutes = require('./routes/api/peijian.js');
 
 var app = express();
 
@@ -29,7 +32,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/api/', serviceRoutes);
+app.use('/api/', anliRoutes);
+app.use('/api/', peijianRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -2,11 +2,10 @@ var express = require('express');
 var multer = require('multer');
 var path = require('path');
 var fs = require("fs");
-const
-url = require('url');
+const url = require('url');
 
-var nano = require('nano')('http://114.215.185.21:5984');
-var db = nano.db.use('vmeifang');
+var nano = global.nano;
+var db = global.db;
 
 var router = express.Router();
 
