@@ -1,5 +1,7 @@
 app.controller('homeCtrl', function($scope, soldCasesFactory) {
-	var soldCases =  soldCasesFactory.query();
+	var soldCases = soldCasesFactory.query({
+		limit : 4
+	});
 	if (soldCases.length > 4) {
 		$scope.customerCases = soldCases.slice(0, 4);
 	} else {

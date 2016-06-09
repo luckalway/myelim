@@ -1,7 +1,10 @@
 app.factory('soldCasesFactory', function($resource) {
-	return $resource('/api/sold-cases', {}, {
+	return $resource('/api/sold-cases?limit=:limit', {}, {
 		query : {
 			method : 'GET',
+			params : {
+				limit : '@limit'
+			},
 			isArray : true
 		},
 		create : {
