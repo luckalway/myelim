@@ -5,6 +5,8 @@ app.config(function($routeProvider) {
 		templateUrl : 'app/admin/anli/anli.html'
 	}).when('/peijian', {
 		templateUrl : 'app/admin/peijian/peijian.html'
+	}).when('/baiye', {
+		templateUrl : 'app/admin/baiye/baiye.html'
 	}).otherwise({
 		redirectTo : '/anli'
 	})

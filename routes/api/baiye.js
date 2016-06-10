@@ -7,23 +7,27 @@ url = require('url');
 
 var router = express.Router();
 
-var UNIT_MAP = {
-	permeter : "元/米"
+var VALUE_MAP = {
+	squaremeter : "元/平方米",
+	baiye : "百叶帘",
+	juan : "卷帘",
+	rousha : "柔纱帘"
 };
 
-router.get('/peijians/folder', function(req, res, next) {
-	var peijians = fs.readdirSync(path.join(global.ROOT_PATH, '/public/data/peijian/guidao'));
-	res.send(peijians);
+router.get('/baiyes/folder', function(req, res, next) {
+	var baiyes = fs.readdirSync(path.join(global.ROOT_PATH, '/public/data/baiye'));
+	res.send(baiyes);
 });
 
-router.get("/peijians", function(req, res, next) {
-	db.view("sold_cases", "peijians", function(err, body) {
+router.get("/baiyes", function(req, res, next) {
+	db.view("sold_cases", "baiyes", function(err, body) {
 		if (!err) {
 			var docs = [];
 			var limit = req.query.limit || 100;
 			body.rows.forEach(function(doc) {
 				if (docs.length < limit) {
-					doc.value.unit = UNIT_MAP[doc.value.unit];
+					doc.value.unitDisplay = VALUE_MAP[doc.value.unit];
+					doc.value.subTypeDisplay = VALUE_MAP[doc.value.subType];
 					docs.push(doc.value);
 				}
 			});
@@ -32,32 +36,32 @@ router.get("/peijians", function(req, res, next) {
 	});
 });
 
-router.post("/peijians", function(req, res, next) {
-	var folderPath = path.join(global.ROOT_PATH, '/public/data/peijian/', req.body.subType, req.body.productId);
+router.post("/baiyes", function(req, res, next) {
+	var folderPath = path.join(global.ROOT_PATH, '/public/data/baiye/', req.body.productId);
 	var allImages = fs.readdirSync(folderPath);
 	var images = [];
-	var baseUrl = url.resolve('/data/peijian/' + req.body.subType + "/", req.body.productId);
+	var baseUrl = url.resolve('/data/baiye/', req.body.productId);
 	allImages.forEach(function(image) {
 		if (/^[0-9]+\.jpg$/.exec(image)) {
 			images.push(baseUrl + "/" + image);
 		}
 	});
 
-	var peijian = {
+	var baiye = {
 		productId : req.body.productId,
 		price : req.body.price,
 		unit : req.body.unit,
 		images : images,
 		preview : baseUrl + "/preview.jpg",
 		subType : req.body.subType,
-		type : "peijian"
+		type : "baiye"
 	}
 
-	db.insert(peijian);
-	res.redirect('/malachiye#/peijian');
+	db.insert(baiye);
+	res.redirect('/malachiye#/baiye');
 });
 
-router.get("/peijians/:id", function(req, res, next) {
+router.get("/baiyes/:id", function(req, res, next) {
 	db.get(req.params.id, {
 		revs_info : true
 	}, function(err, body) {
@@ -66,7 +70,7 @@ router.get("/peijians/:id", function(req, res, next) {
 	});
 });
 
-router.delete("/peijians/:id", function(req, res, next) {
+router.delete("/baiyes/:id", function(req, res, next) {
 	db.get(req.params.id, {
 		revs_info : true
 	}, function(err, body) {

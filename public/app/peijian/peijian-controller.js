@@ -1,13 +1,11 @@
-app.controller('peijianListCtrl', function($scope) {
-	$scope.peijians = [].concat(window.guidaos).concat(window.luomagans);
+app.controller('peijianListCtrl', function($scope, $http) {
+	$http.get("/api/peijians").success(function(response) {
+		$scope.peijians = response;
+	});
 });
-  
-app.controller('peijianDetailCtrl', function($scope, $routeParams) {
-	var peijians = [].concat(window.guidaos).concat(window.luomagans);
-	for (var i = 0; i < peijians.length; i++) {
-		if ($routeParams.id == peijians[i].id) {
-			$scope.peijianItem = peijians[i];
-			break;
-		}
-	}
+
+app.controller('peijianDetailCtrl', function($scope, $routeParams, $http) {
+	$http.get("/api/peijians/" + $routeParams.id).success(function(response) {
+		$scope.peijianItem = response;
+	});
 });

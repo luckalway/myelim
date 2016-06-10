@@ -1,14 +1,11 @@
-app.controller('baiyeListCtrl', function($scope) {
-	$scope.baiyes = window.baiyes;
-	console.log($scope.baiyes);
+app.controller('baiyeListCtrl', function($scope, $http) {
+	$http.get("/api/baiyes").success(function(response) {
+		$scope.baiyes = response;
+	});
 });
 
-app.controller('baiyeDetailCtrl', function($scope, $routeParams) {
-	console.log(window.baiyes);
-	for (var i = 0; i < window.baiyes.length; i++) {
-		if ($routeParams.id == window.baiyes[i].id) {
-			$scope.baiyeItem = window.baiyes[i];
-			break;
-		}
-	}
+app.controller('baiyeDetailCtrl', function($scope, $routeParams, $http) {
+	$http.get("/api/baiyes/" + $routeParams.id).success(function(response) {
+		$scope.baiye = response;
+	});
 });

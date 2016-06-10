@@ -13,6 +13,7 @@ global.db = nano.db.use('vmeifang');
 var routes = require('./routes/index');
 var anliRoutes = require('./routes/api/sold-case.js');
 var peijianRoutes = require('./routes/api/peijian.js');
+var baiyeRoutes = require('./routes/api/baiye.js');
 
 var app = express();
 
@@ -34,6 +35,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/api/', anliRoutes);
 app.use('/api/', peijianRoutes);
+app.use('/api/', baiyeRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
