@@ -4,8 +4,6 @@ var path = require('path');
 var fs = require("fs");
 const url = require('url');
 
-var nano = global.nano;
-var db = global.db;
 
 var router = express.Router();
 
@@ -39,7 +37,6 @@ router.get('/sold-cases/:id', function(req, res, next) {
 });
 
 router.post('/sold-cases', function(req, res, next) {
-	var regexp = new RegExp('[0-9]+\.jpg');
 	var folderPath = path.join(global.ROOT_PATH, '/public/data/sold-show/', req.body.imageFolder);
 	var allImages = fs.readdirSync(folderPath);
 	var images = [];
@@ -61,7 +58,7 @@ router.post('/sold-cases', function(req, res, next) {
 	};
 
 	db.insert(soldCase);
-	res.redirect('/malachiye#/admin');
+	res.redirect('/malachiye#/anli');
 });
 
 router.delete("/sold-cases/:id", function(req, res, next) {

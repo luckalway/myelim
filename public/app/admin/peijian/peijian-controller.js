@@ -4,15 +4,18 @@ app.controller('peijianCtrl', function($scope, soldCasesFactory, soldCaseFactory
 		$scope.folders = response;
 	});
 
-	$scope.soldCases = soldCasesFactory.query();
-	console.log($scope.soldCases);
-	$scope.showItemDialog = function() {
-
-	}
+	$http.get("/api/peijians").success(function(response) {
+		$scope.peijians = response;
+	});
 
 	$scope.deleteItem = function($id) {
-		soldCaseFactory.remove({
-			id : $id
+		$http({
+			url : '/api/peijians/' + $id,
+			method : 'DELETE'
+		}).success(function(data, header, config, status) {
+
+		}).error(function(data, header, config, status) {
+
 		});
 		window.location.reload();
 	}

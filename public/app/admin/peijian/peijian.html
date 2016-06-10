@@ -2,6 +2,7 @@
 	<table class="table table-hover">
 		<thead>
 			<tr>
+				<th>类型</th>
 				<th>货号</th>
 				<th>价格</th>
 				<th>计价单位</th>
@@ -10,10 +11,11 @@
 		</thead>
 		<tbody>
 			<tr ng-repeat="item in peijians">
+				<td>{{item.subType}}</td>
 				<td>{{item.productId}}</td>
 				<td>{{item.price}}</td>
 				<td>{{item.unit}}</td>
-				<td><a ng-click="deleteItem(item._id,item._rev)" class="btn btn-small btn-danger">删除</a></td>
+				<td><a ng-click="deleteItem(item._id)" class="btn btn-small btn-danger">删除</a></td>
 			</tr>
 		</tbody>
 	</table>
@@ -27,8 +29,14 @@
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 					<h4 class="modal-title" id="peijian-model-label">配件-添加/修改</h4>
 				</div>
-				<form role="form" action="/api/sold-cases" method="POST">
+				<form role="form" action="/api/peijians" method="POST">
 					<div class="modal-body">
+						<div class="form-group">
+							<label for="name">类型</label> <select class="form-control" id="subType" name="subType" required><option
+									value="">请选择类型</option>
+								<option value="guidao">轨道</option>
+								<option value="luomagan">罗马杆</option></select>
+						</div>
 						<div class="form-group">
 							<label for="name">货号</label> <select class="form-control" id="productId" name="productId" required><option
 									value="">请选择货号</option>
@@ -36,12 +44,12 @@
 						</div>
 						<div class="form-group">
 							<label for="name">价格</label> <input type="text" class="form-control" id="price" name="price" placeholder="请输入价格"
-								required readonly>
+								required>
 						</div>
 						<div class="form-group">
-							<label for="name">计价单位</label> <select class="form-control" id="unit" name="unit" required><option
-									value="">请选择计价单位</option>
-								<option value="permeter">元/米</option></select>
+							<label for="name">计价单位</label> <select class="form-control" id="unit" name="unit" required>
+								<option value="permeter">元/米</option>
+							</select>
 						</div>
 					</div>
 					<div class="modal-footer">
