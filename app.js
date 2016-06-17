@@ -5,6 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var ejs = require('ejs');
+var jwt = require('express-jwt');
+var secret = require('./config/secret.js');
 
 global.ROOT_PATH = __dirname;
 global.nano = require('nano')('http://keeper:4753295@114.215.185.21:5984');
@@ -14,6 +16,7 @@ var routes = require('./routes/index');
 var anliRoutes = require('./routes/api/sold-case.js');
 var peijianRoutes = require('./routes/api/peijian.js');
 var baiyeRoutes = require('./routes/api/baiye.js');
+var loginRoutes = require('./routes/admin/login.js');
 
 var app = express();
 
@@ -36,6 +39,7 @@ app.use('/', routes);
 app.use('/api/', anliRoutes);
 app.use('/api/', peijianRoutes);
 app.use('/api/', baiyeRoutes);
+app.use('/admin/', loginRoutes)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -67,6 +71,12 @@ app.use(function(err, req, res, next) {
 		error : {}
 	});
 });
+
+/***
+app.use(jwt({
+	secret : secret.secretToken
+}));
+**/
 
 module.exports = app;
 
