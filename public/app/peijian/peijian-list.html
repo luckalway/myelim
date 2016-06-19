@@ -40,7 +40,7 @@
 <div ng-controller="peijianListCtrl">
 	<ul class="gallery-wrapper">
 		<li ng-repeat="peijian in peijians"><a href="#/peijian/detail?id={{peijian._id}}" class="thumbnail"><img
-				ng-src="{{peijian.images[0]}}" width="280px" height="280px" alt="..."> {{peijian.title}}</a></li>
+				ng-src="{{peijian.preview}}_280.jpg" width="280px" height="280px" alt="..."> {{peijian.title}}</a></li>
 	</ul>
 	<div class="clear">
 		<br>
