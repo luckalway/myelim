@@ -1,0 +1,287 @@
+.module-toggle-bar {
+	-moz-border-bottom-colors: none;
+	-moz-border-left-colors: none;
+	-moz-border-right-colors: none;
+	-moz-border-top-colors: none;
+	background: #fafafa none repeat scroll 0 0;
+	border-color: #e6e6e6 #e6e6e6 #ddd;
+	border-image: none;
+	border-style: solid;
+	border-width: 1px;
+	height: 38px;
+}
+
+.module-toggle-bar.fixed-top {
+	box-shadow: 0 1px 5px #c9c9c9;
+	position: fixed;
+	top: 0;
+	width: 978px;
+	z-index: 4;
+}
+
+.module-toggle-bar .list {
+	height: 38px;
+	line-height: 38px;
+}
+
+.module-toggle-bar .list a.current {
+	background: #c9033b none repeat scroll 0 0;
+	border-right-color: #c9033b;
+	color: #fff !important;
+	margin-top: -1px;
+	padding: 1px 0;
+	position: relative;
+}
+
+.module-toggle-bar .list a {
+	border-right: 1px solid #e6e6e6;
+	color: #444;
+	display: inline-block;
+	font-size: 14px;
+	font-weight: bold;
+	height: 38px;
+	overflow: hidden;
+	text-align: center;
+	text-decoration: none;
+	vertical-align: top;
+	width: 115px;
+}
+
+.goods-detail .list {
+	-moz-border-bottom-colors: none;
+	-moz-border-left-colors: none;
+	-moz-border-right-colors: none;
+	-moz-border-top-colors: none;
+	border-color: -moz-use-text-color #e6e6e6 #e6e6e6;
+	border-image: none;
+	border-style: none solid solid;
+	border-width: 0 1px 1px;
+	color: #666;
+	margin-bottom: 10px;
+	padding: 10px 30px;
+}
+
+.goods-detail .list table {
+	width: 100%;
+}
+
+.goods-detail .list table tr td {
+	height: 26px;
+}
+
+.goods-standard {
+	margin-top: 10px;
+}
+
+.goods-standard table {
+	border: 1px solid #e6e6e6;
+	width: 100%;
+}
+
+.goods-standard table tr th {
+	background: #f8f8f8 none repeat scroll 0 0;
+	color: #333;
+	padding-left: 35px;
+	text-align: left;
+}
+
+.goods-standard table tr td.key {
+	border-right: 0 none;
+	text-align: right;
+	width: 18%;
+}
+
+.goods-standard table tr td {
+	color: #666;
+	padding-left: 20px;
+}
+
+.goods-standard table tr th, .goods-standard table tr td {
+	border-top: 1px solid #eaeaea;
+	line-height: 18px;
+	padding: 6px 0;
+	vertical-align: top;
+}
+
+.sale-records .body {
+	padding: 15px 0 26px;
+}
+
+.layout-module .body {
+	border: 1px solid #e6e6e6;
+}
+
+.sale-records .records-list tr .nick {
+	padding-left: 40px;
+}
+
+.sale-records .records-list tr th, .sale-records .records-list tr td {
+	text-align: left;
+}
+
+.sale-records .records-list tr th {
+	background: #f8f8f8 none repeat scroll 0 0;
+	color: #666;
+	height: 30px;
+	line-height: 30px;
+}
+
+.sale-records .records-list tr th, .sale-records .records-list tr td {
+	text-align: left;
+}
+
+.sale-records .records-list tr th {
+	background: #f8f8f8 none repeat scroll 0 0;
+	color: #666;
+	height: 30px;
+	line-height: 30px;
+}
+
+.main-frame .current .head {
+	display: none;
+}
+
+.layout-module .head {
+	height: 37px;
+	padding-right: 30px;
+	position: relative;
+}
+
+.goods-comment .body {
+	height: 80px;
+	padding: 20px 0 20px 72px;
+}
+
+.mt10 {
+	margin-top: 10px;
+}
+
+.goods-comment .filter {
+	background: #f8f8f8 none repeat scroll 0 0;
+	border: 1px solid #e8e8e8;
+	height: 16px;
+	padding: 8px 0 8px 30px;
+}
+
+.goods-comment .filter a:hover, .goods-comment .filter a.current {
+	color: #c9033b !important;
+}
+
+.goods-comment .filter a.current {
+	background-position: -264px -287px;
+}
+
+.goods-comment .filter a {
+	color: #666;
+	display: inline-block;
+	line-height: 16px;
+	margin-right: 28px;
+	text-decoration: none;
+	vertical-align: top;
+}
+
+.goods-comment .comment-table .user-label {
+	text-align: center;
+	width: 136px;
+}
+
+.goods-comment .comment-table tr td {
+	border-bottom: 1px solid #e6e6e6;
+	padding: 20px 0;
+	vertical-align: top;
+}
+
+.goods-comment .comment-table .user-label .avatar {
+	height: 56px;
+}
+
+.goods-comment .comment-table .user-label .name {
+	color: #666;
+	line-height: 16px;
+	margin-top: 7px;
+}
+
+.goods-comment .comment-table .user-label .extend {
+	color: #999;
+	line-height: 16px;
+}
+
+img {
+	background: #eee none repeat scroll 0 0;
+	overflow: hidden;
+	vertical-align: top;
+}
+
+.clearfix::after {
+	clear: both;
+	content: ".";
+	display: block;
+	height: 0;
+	visibility: hidden;
+}
+
+.goods-comment .page-unit {
+	margin-top: 20px;
+}
+
+.page-unit table tr td {
+	padding: 0 3px;
+}
+
+.goods-comment .layout-module .level-mark {
+	margin-right: 85px;
+}
+
+.goods-comment .layout-module .level-mark .score {
+	color: #666;
+}
+
+.goods-comment .layout-module .level-mark .score strong {
+	font-size: 38px;
+	font-weight: normal;
+}
+
+.goods-comment .star .bar {
+	background-position: -165px -246px;
+	display: inline-block;
+	height: 12px;
+	vertical-align: top;
+}
+
+.goods-comment .layout-module .level-view {
+	border-left: 1px dashed #e6e6e6;
+	border-right: 1px dotted #e6e6e6;
+	height: 80px;
+	margin-right: 80px;
+	padding: 0 64px;
+	width: 270px;
+}
+
+.Left {
+	float: left;
+}
+
+.goods-comment .layout-module .level-view table tr td {
+	color: #666;
+	height: 25px;
+}
+
+.goods-comment .layout-module .level-view .level {
+	background: #e5e5e5 none repeat scroll 0 0;
+	height: 10px;
+	margin: 0 5px;
+	overflow: hidden;
+	width: 188px;
+}
+
+.goods-comment .layout-module .level-view .level .bar {
+	background: #c9033b none repeat scroll 0 0;
+	display: inline-block;
+	height: 10px;
+	vertical-align: top;
+}
+
+.goods-comment .layout-module .level-view table tr td {
+	color: #666;
+	height: 25px;
+}

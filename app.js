@@ -79,5 +79,3 @@ app.use(jwt({
 **/
 
 module.exports = app;
-
-console.log("Started");
