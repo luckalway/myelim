@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var ejs = require('ejs');
 var jwt = require('express-jwt');
 var secret = require('./config/secret.js');
+var fs = require("fs");
 
 global.ROOT_PATH = __dirname;
 global.nano = require('nano')('http://keeper:4753295@114.215.185.21:5984');
@@ -44,8 +45,15 @@ app.use('/admin/', loginRoutes)
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
 	var err = new Error('Not Found');
-	err.status = 404;
-	next(err);
+	var requestImage = req.headers.accept.startsWith("image");
+	if(requestImage&&req.url.startsWith("/data")){
+		var img404 = fs.readFileSync(ROOT_PATH+'/public/images/404/default.jpg');
+		res.writeHead(200, {'Content-Type': 'image/jpg' });
+		res.end(img404, 'binary');
+	}else{
+		err.status = 404;
+		next(err);
+	}
 });
 
 // error handlers
