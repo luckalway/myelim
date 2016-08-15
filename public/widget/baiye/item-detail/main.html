@@ -40,7 +40,7 @@
 				<table>
 					<tbody>
 						<tr>
-							<td>商品名称：高档别墅实木椴木百叶窗帘窗帘35mm（限时包邮）</td>
+							<td>商品名称：<%= item.title%></td>
 							<td>商品编号：choose-by-003</td>
 							<td>商品品牌：<a class="red" target="_blank" href="/brand-549/">CHOOSE</a></td>
 						</tr>
@@ -57,21 +57,9 @@
 
 
 			<div style="margin-bottom: 10px;" data-source="pictures" class="img">
-				<img width="1024" height="100" alt=""
-					data-src="http://image.meilele.com/images/169aacc76bd1124adcb36aa11cf55713/175/b361c042d4e08522b06b2dea8f20a163/0.jpg"
-					src="http://image.meilele.com/images/169aacc76bd1124adcb36aa11cf55713/175/b361c042d4e08522b06b2dea8f20a163/0.jpg"><br>
-				<img width="1024" height="100" alt=""
-					data-src="http://image.meilele.com/images/169aacc76bd1124adcb36aa11cf55713/175/b361c042d4e08522b06b2dea8f20a163/1.jpg"
-					src="http://image.meilele.com/images/169aacc76bd1124adcb36aa11cf55713/175/b361c042d4e08522b06b2dea8f20a163/1.jpg"><br>
-				<img width="1024" height="100" alt=""
-					data-src="http://image.meilele.com/images/169aacc76bd1124adcb36aa11cf55713/175/b361c042d4e08522b06b2dea8f20a163/2.jpg"
-					src="http://image.meilele.com/images/169aacc76bd1124adcb36aa11cf55713/175/b361c042d4e08522b06b2dea8f20a163/2.jpg"><br>
-				<img width="1024" height="100" alt=""
-					data-src="http://image.meilele.com/images/169aacc76bd1124adcb36aa11cf55713/175/b361c042d4e08522b06b2dea8f20a163/3.jpg"
-					src="http://image.meilele.com/images/169aacc76bd1124adcb36aa11cf55713/175/b361c042d4e08522b06b2dea8f20a163/3.jpg"><br>
-				<img width="1024" height="100" alt=""
-					data-src="http://image.meilele.com/images/169aacc76bd1124adcb36aa11cf55713/175/b361c042d4e08522b06b2dea8f20a163/4.jpg"
-					src="http://image.meilele.com/images/169aacc76bd1124adcb36aa11cf55713/175/b361c042d4e08522b06b2dea8f20a163/4.jpg"><br>
+				<% item.images.forEach(function(imagesrc){ %>  
+				<img alt=""	data-src="<%= imagesrc %>" src="<%= imagesrc %>"><br>
+				<% }) %>  
 			</div>
 
 		</div>
