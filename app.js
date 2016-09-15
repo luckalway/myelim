@@ -12,6 +12,7 @@ var fs = require("fs");
 global.ROOT_PATH = __dirname;
 global.nano = require('nano')('http://keeper:4753295@114.215.185.21:5984');
 global.db = nano.db.use('vmeifang');
+global.upload = require('jquery-file-upload-middleware');
 
 var routes = require('./routes/index');
 var anliRoutes = require('./routes/api/sold-case.js');

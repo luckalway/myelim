@@ -21,6 +21,7 @@
 		"date-format": "*",
 		"jwt-simple": "*",
 		"redis": "*",
-		"express-jwt": "*"
+		"express-jwt": "*",
+		"jquery-file-upload-middleware": "*"
 	}
 }

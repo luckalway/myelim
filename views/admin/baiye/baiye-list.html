@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>后台管理</title>
+<% include ../include/script.html %>
+</head>
+<body>
+<% include ../include/header.html %>
+<div class="widget" style="width:100%;margin:0 auto;">
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>类型</th>
+				<th>货号</th>
+				<th>价格</th>
+				<th>计价单位</th>
+				<th>
+					<button class="btn btn-primary" data-toggle="modal" data-target="#baiye-model">添加</button>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% baiyes.forEach(function(item){ %>
+			<tr ng-repeat="item in baiyes">
+				<td><%= item.subTypeDisplay%></td>
+				<td><%= item.productId%></td>
+				<td><%= item.price%></td>
+				<td><%= item.unitDisplay%></td>
+				<td><a ng-click="deleteItem(item._id)" class="btn btn-small btn-danger">删除</a></td>
+			</tr>
+			<% }) %>
+		</tbody>
+	</table>
+
+
+	<div class="modal fade" id="baiye-model" tabindex="-1" role="dialog"
+		aria-labelledby="baiye-model-label" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">×</button>
+					<h4 class="modal-title" id="baiye-model-label">配件-添加/修改</h4>
+				</div>
+				<form role="form" action="/api/baiyes" method="POST" enctype="multipart/form-data" file-upload="options">
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="name">类型</label> <select class="form-control"
+								id="subType" name="subType" required>
+								<option value="">请选择类型</option>
+								<option value="juan">卷帘</option>
+								<option value="baiye">百叶帘</option>
+								<option value="rousha">柔纱帘</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="name">货号</label> <select class="form-control"
+								id="productId" name="productId" required>
+								<option value="">请选择货号</option>
+								<option ng-repeat="folderName in folders" value="{{folderName}}">{{folderName}}</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="name">价格</label><input type="text"
+								class="form-control" id="price" name="price" placeholder="请输入价格"
+								required>
+						</div>
+						<div class="form-group">
+							<label for="name">计价单位</label> <select class="form-control"
+								id="unit" name="unit" required>
+								<option value="squaremeter">元/平方米</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<!-- Add Files Button -->
+							<span class="btn btn-success fileinput-button">
+								<i class="glyphicon glyphicon-plus"></i><span>Add files...</span>
+								<input type="file" name="files" multiple="" ng-disabled="disabled">
+							</span>
+	
+							<!-- Start Upload Button -->
+							<button type="button" class="btn btn-primary start"
+								ng-click="submit()">
+								<i class="glyphicon glyphicon-upload"></i> <span>Start
+									upload</span>
+							</button>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="submit" class="btn btn-primary" value="提交更改">提交更改</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<% include ../../include/footer.html %>
+</body>
+</html>

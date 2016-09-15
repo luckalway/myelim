@@ -36,6 +36,20 @@ router.get("/baiyes", function(req, res, next) {
 	});
 });
 
+router.post('/baiyes', function (req, res, next) {
+    // imageVersions are taken from upload.configure()
+	var folderName = new Date().getTime();
+    upload.fileHandler({
+        uploadDir: function () {
+            return global.ROOT_PATH + '/public/data/baiye/temp' 
+        },
+        uploadUrl: function () {
+            return '/data/baiye/temp'
+        }
+    })(req, res, next);
+});
+
+/**
 router.post("/baiyes", function(req, res, next) {
 	var folderPath = path.join(global.ROOT_PATH, '/public/data/baiye/', req.body.productId);
 	var allImages = fs.readdirSync(folderPath);
@@ -60,6 +74,7 @@ router.post("/baiyes", function(req, res, next) {
 	db.insert(baiye);
 	res.redirect('/malachiye#/baiye');
 });
+**/
 
 router.get("/baiyes/:id", function(req, res, next) {
 	db.get(req.params.id, {
