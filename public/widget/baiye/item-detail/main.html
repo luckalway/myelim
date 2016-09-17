@@ -1,300 +1,266 @@
-<html>
-<head>
-<meta charset="UTF-8" />
-<link rel="stylesheet" href="item-detail.css" />
-<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
-<script src="item-detail.js"></script>
-</head>
-<body>
+<div class="item-detail main-frame">
+	<div id="JS_float_navs_position" style="height: 0px; position: absolute;"></div>
 
-	<div class="item-detail main-frame">
-		<div id="JS_float_navs_position" style="height: 0px; position: absolute;"></div>
-
-		<div class="module-toggle-bar" id="float_navs">
-			<div class="list Left">
-				<a data-value="商品详情" id="JS_gd_tab_head_xiangqing" class="first current" href="javascript:;" data-key="xiangqing">商品详情</a><a
-					data-value="规格参数" id="JS_gd_tab_head_guige" href="javascript:;" data-key="guige">规格参数</a><a data-value="评价"
-					style="display: inline-block;" id="JS_gd_tab_head_pingjia" href="javascript:;" data-key="pingjia">评价<span
-					class="red">(0)</span></a><a data-value="已售" style="display: inline-block;" id="JS_gd_tab_head_jilu"
-					href="javascript:;" data-key="jilu">已售<span class="red">(36)</span></a><a data-value="真实案例"
-					style="display: inline-block;" id="JS_gd_tab_head_tiyanguan" href="javascript:;" data-key="anli">真实案例<span
-					class="red">(7)</span></a>
-			</div>
-			<div class="side-btn Right">
-				<table>
-					<tbody>
-						<tr>
-							<td><div class="chat-box"></div></td>
-
-							<td><div class="add-box" id="JS_float_chat_box">
-									<a class="add" href="javascript:;" id="JS_float_nav_buy"></a>
-								</div></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
+	<div class="module-toggle-bar" id="float_navs">
+		<div class="list Left">
+			<a data-value="商品详情" id="JS_gd_tab_head_xiangqing" class="first current" href="javascript:;" data-key="xiangqing">商品详情</a><a
+				data-value="规格参数" id="JS_gd_tab_head_guige" href="javascript:;" data-key="guige">规格参数</a><a data-value="评价"
+				style="display: inline-block;" id="JS_gd_tab_head_pingjia" href="javascript:;" data-key="pingjia">评价<span
+				class="red">(0)</span></a><a data-value="已售" style="display: inline-block;" id="JS_gd_tab_head_jilu" href="javascript:;"
+				data-key="jilu">已售<span class="red">(36)</span></a><a data-value="真实案例" style="display: inline-block;"
+				id="JS_gd_tab_head_tiyanguan" href="javascript:;" data-key="anli">真实案例<span class="red">(7)</span></a>
 		</div>
-
-		<div class="goods-detail current" id="item_xiangqing" style="display: block;">
-			<div class="list">
-				<table>
-					<tbody>
-						<tr>
-							<td>商品名称：<%= item.title%></td>
-							<td>商品编号：choose-by-003</td>
-							<td>商品品牌：<a class="red" target="_blank" href="/brand-549/">CHOOSE</a></td>
-						</tr>
-						<tr>
-							<td>商品材质：其他材质</td>
-							<td>商品重量：1.2kg</td>
-							<td>商品产地： 中国浙江</td>
-						</tr>
-						<tr>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-
-
-			<div style="margin-bottom: 10px;" data-source="pictures" class="img">
-				<% item.images.forEach(function(imagesrc){ %>  
-				<img alt=""	data-src="<%= imagesrc %>" src="<%= imagesrc %>"><br>
-				<% }) %>  
-			</div>
-
-		</div>
-
-		<div style="display: none;" class="goods-standard" id="item_guige">
+		<div class="side-btn Right">
 			<table>
 				<tbody>
-					<tr class="first">
-						<th colspan="2">产品参数</th>
+					<tr>
+						<td><div class="chat-box"></div></td>
+
+						<td><div class="add-box" id="JS_float_chat_box">
+								<a class="add" href="javascript:;" id="JS_float_nav_buy"></a>
+							</div></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="goods-detail current" id="item_xiangqing" style="display: block;">
+		<div class="list">
+			<table>
+				<tbody>
+					<tr>
+						<td>商品名称：<%= item.title%></td>
+						<td>商品编号：choose-by-003</td>
+						<td>商品品牌：<a class="red" target="_blank" href="/brand-549/">CHOOSE</a></td>
 					</tr>
 					<tr>
-						<td class="key">品牌：</td>
-						<td>CHOOSE</td>
+						<td>商品材质：其他材质</td>
+						<td>商品重量：1.2kg</td>
+						<td>商品产地： 中国浙江</td>
 					</tr>
 					<tr>
-						<td class="key">型号：</td>
-						<td>choose-by-003</td>
-					</tr>
-					<tr>
-						<td class="key">体积：</td>
-						<td>0.018m³</td>
-					</tr>
-					<tr>
-						<td class="key">功能：</td>
-						<td>全遮光</td>
-					</tr>
-					<tr>
-						<td class="key">色系：</td>
-						<td>暖色系</td>
-					</tr>
-					<tr>
-						<td class="key">颜色：</td>
-						<td>其他</td>
-					</tr>
-					<tr>
-						<td class="key">产地：</td>
-						<td>中国浙江</td>
-					</tr>
-					<tr>
-						<td class="key">安装方式：</td>
-						<td>其它</td>
-					</tr>
-					<tr>
-						<td class="key">适用空间：</td>
-						<td>室内</td>
-					</tr>
-					<tr>
-						<td class="key">特殊说明：</td>
-						<td>因百叶帘为定制产品，故外包装尺寸不能做为收货依据，具体包装尺寸根据客户定制尺寸不同而不同，请介意的朋友慎拍！</td>
-					</tr>
-					<tr>
-						<td class="key">产品描述：</td>
-						<td>隔热、降温、遮光、防水、易清洁、操作便捷、环保健康、不褪色。有多色可供选择，默认白色，如需其它色请联系客服！</td>
-					</tr>
-					<tr>
-						<td class="key">费用情况：</td>
-						<td>包邮！偏远地区需补运费差价！请联系客服。</td>
-					</tr>
-					<tr>
-						<td class="key">发货周期：</td>
-						<td>发货周期为5-7天，如有断货情况我们会及时与您联系。由于我们无法控制物流公司，偶尔因天气、路况等因素造成货物延误还请买家给予多多理解！</td>
-					</tr>
-					<tr>
-						<td class="key">保养说明：</td>
-						<td>日常使用吸尘器或尘掸清洁，或用干抹布轻擦拭，不可机洗。</td>
-					</tr>
-					<tr>
-						<td class="key">友情提示：</td>
-						<td>所有产品均为实物拍摄，因光线、角度等原因颜色与实物略有差异，请以实际商品为准。</td>
-					</tr>
-					<tr>
-						<th colspan="2">定制范围</th>
-					</tr>
-					<tr>
-						<td class="key">产品定制：</td>
-						<td>百叶帘为定制产品无质量问题不得退换货。感谢您的理解与支持。</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 
-		<div class="goods-comment commentBox" id="item_pingjia" style="display: none;">
-			<div class="layout-module">
-				<div class="head">
-					<ul class="head-tab">
-						<li class="current">评价(6)</li>
-					</ul>
-				</div>
-				<div class="body">
-					<div class="level-mark Left">
-						<div class="score">
-							<strong class="red">5.0</strong>分
-						</div>
-						<div class="star">
-							<span style="width: 100%" class="bar"></span>
-						</div>
-					</div>
-					<div class="level-view Left">
-						<table>
-							<tbody>
-								<tr>
-									<td align="right">满意</td>
-									<td><div class="level">
-											<span style="width: 100%" class="bar"></span>
-										</div></td>
-									<td>100%</td>
-								</tr>
-								<tr>
-									<td align="right">一般</td>
-									<td><div class="level">
-											<span style="width: 0%" class="bar"></span>
-										</div></td>
-									<td>0%</td>
-								</tr>
-								<tr>
-									<td align="right">不满意</td>
-									<td><div class="level">
-											<span style="width: 0%" class="bar"></span>
-										</div></td>
-									<td>0%</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<div class="tip-txt Left">
-						<div class="gold">
-							<a class="btn" title="发评价赢金币" target="_blank" href="/user/?act=comment_list"></a><a class="red" title="什么是金币？"
-								target="_blank" href="http://www.meilele.com/article_cat-6/article-9931.html">什么是金币？</a>
-						</div>
-						<p>
-						</p>
-					</div>
-				</div>
-			</div>
-			<div class="mt10" id="JS_comment_box">
-				<div class="filter">
-					<a class="cm_fliter current" href="javascript:;"><span class="t">全部评价</span>(6)</a><a data-slash="high"
-						class="cm_fliter " href="javascript:;"><span class="t">满意</span>(6)</a><a data-slash="middle" class="cm_fliter "
-						href="javascript:;"><span class="t">一般</span>(0)</a><a data-slash="low" class="cm_fliter " href="javascript:;"><span
-						class="t">不满意</span>(0)</a><a data-slash="only_show" class="cm_fliter xspace " href="javascript:;"><span class="t">秀家</span>(1)</a>
-				</div>
-				<div class="comment-table">
-					<table>
-						<tbody>
-							<tr data-user_name="mll_15601292***" data-comment_id="572066" id="JS_comment_list_572066">
-								<td class="user-label"><div class="avatar">
-										<img width="56" height="56" src="http://image.meilele.com/images/goods/avatar/level4.gif">
-									</div>
-									<p class="name">
-										<span class="">mll_15601292***</span>
-									</p>
-									<p class="extend">
-										<span class="red">昆山</span>&ensp;黄金会员
-									</p></td>
-								<td class="c-content"><div class="c-tip clearfix">
-										<div class="score Left">
-											<span class="star"><span style="width: 100%;" class="bar"></span></span><span>5分</span>
-										</div>
-										<div class="time Right">2016-05-05 00:05:31发布“评价”</div>
-									</div>
-									<p>几款窗帘中价格最便宜的，但挂上后效果同样很好，底色为蓝灰色，挂在书房很合适。谢谢美乐乐昆山店的小顾，为了买到心仪的家具和窗帘，曾多次反复改动，改价，占用了他很多的时间，徒增了很多工作量，但他从未有半点不耐烦，总是非常耐心地按顾客要求和喜好完成各项订单，认真负责的精神实在可嘉！需要提一下，两位上门安装的师傅也很认真。</p>
-									<a class="nice JS_comment_like" title="有用" href="javascript:;"><span class="text">(0)</span><span
-										class="space"></span></a></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<div class="page-unit clearfix">
-					<table>
-						<tbody>
-							<tr>
-								<td><span class="current">1</span></td>
-								<td>到第</td>
-								<td><input id="JS_sale_pingjia_page_input" value="1" class="go-num"></td>
-								<td>页</td>
-								<td><a data-page="input" data-slash="null" href="javascript:;" class="go cm_fliter">确定</a></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
+
+		<div style="margin-bottom: 10px;" data-source="pictures" class="img">
+			<% item.images.forEach(function(imagesrc){ %> <img alt="" data-src="<%= imagesrc %>" src="//8qiu.cn/<%= imagesrc %>"><br>
+			<% }) %>
 		</div>
-
-
-		<div class="layout-module sale-records" id="item_jilu" style="display: none;">
-			<div class="head">
-				<ul class="head-tab">
-					<li class="current" id="JS_jilu_header_text">已售</li>
-				</ul>
-			</div>
-			<div class="body">
-				<div id="JS_goods_sale_records_list">
-					<table class="records-list">
-						<tbody>
-							<tr>
-								<th width="175" class="nick">会员名</th>
-								<th width="328">商品名称</th>
-								<th width="200">地址</th>
-								<th class="align-c">件数</th>
-								<th width="185" class="align-c">成交时间</th>
-							</tr>
-							<tr>
-								<td class="nick">mll_13987632***</td>
-								<td><div class="goods-name">定制高档窗帘树遮光布料成品欧式卧室客厅 玉树临风 自由蓝</div></td>
-								<td><strong>昆明</strong> 理想小镇55*************</td>
-								<td class="align-c">82</td>
-								<td class="align-c">2016年06月30日</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<div class="page-unit clearfix" id="JS_goods_sale_records_pager">
-					<table>
-						<tbody>
-							<tr>
-								<td><span class="current">1</span></td>
-								<td><a data-page="2" class="record_url" href="javascript:;">2</a></td>
-								<td><a data-page="3" class="record_url" href="javascript:;">3</a></td>
-								<td><a data-page="4" class="record_url" href="javascript:;">4</a></td>
-								<td><a data-page="2" href="javascript:;" class="next record_url">下一页<span class="arrow"><span
-											class="char">◆</span></span></a></td>
-								<td>到第</td>
-								<td><input id="JS_sale_record_page_input" value="1" class="go-num"></td>
-								<td>页</td>
-								<td><a data-page="input" href="javascript:;" class="go">确定</a></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-
 
 	</div>
 
+	<div style="display: none;" class="goods-standard" id="item_guige">
+		<table>
+			<tbody>
+				<tr class="first">
+					<th colspan="2">产品参数</th>
+				</tr>
+				<tr>
+					<td class="key">品牌：</td>
+					<td>CHOOSE</td>
+				</tr>
+				<tr>
+					<td class="key">型号：</td>
+					<td>choose-by-003</td>
+				</tr>
+				<tr>
+					<td class="key">体积：</td>
+					<td>0.018m³</td>
+				</tr>
+				<tr>
+					<td class="key">功能：</td>
+					<td>全遮光</td>
+				</tr>
+				<tr>
+					<td class="key">色系：</td>
+					<td>暖色系</td>
+				</tr>
+				<tr>
+					<td class="key">颜色：</td>
+					<td>其他</td>
+				</tr>
+				<tr>
+					<td class="key">产地：</td>
+					<td>中国浙江</td>
+				</tr>
+				<tr>
+					<td class="key">安装方式：</td>
+					<td>其它</td>
+				</tr>
+				<tr>
+					<td class="key">适用空间：</td>
+					<td>室内</td>
+				</tr>
+				<tr>
+					<td class="key">特殊说明：</td>
+					<td>因百叶帘为定制产品，故外包装尺寸不能做为收货依据，具体包装尺寸根据客户定制尺寸不同而不同，请介意的朋友慎拍！</td>
+				</tr>
+				<tr>
+					<td class="key">产品描述：</td>
+					<td>隔热、降温、遮光、防水、易清洁、操作便捷、环保健康、不褪色。有多色可供选择，默认白色，如需其它色请联系客服！</td>
+				</tr>
+				<tr>
+					<td class="key">费用情况：</td>
+					<td>包邮！偏远地区需补运费差价！请联系客服。</td>
+				</tr>
+				<tr>
+					<td class="key">发货周期：</td>
+					<td>发货周期为5-7天，如有断货情况我们会及时与您联系。由于我们无法控制物流公司，偶尔因天气、路况等因素造成货物延误还请买家给予多多理解！</td>
+				</tr>
+				<tr>
+					<td class="key">保养说明：</td>
+					<td>日常使用吸尘器或尘掸清洁，或用干抹布轻擦拭，不可机洗。</td>
+				</tr>
+				<tr>
+					<td class="key">友情提示：</td>
+					<td>所有产品均为实物拍摄，因光线、角度等原因颜色与实物略有差异，请以实际商品为准。</td>
+				</tr>
+				<tr>
+					<th colspan="2">定制范围</th>
+				</tr>
+				<tr>
+					<td class="key">产品定制：</td>
+					<td>百叶帘为定制产品无质量问题不得退换货。感谢您的理解与支持。</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 
-</body>
-</html>
+	<div class="goods-comment commentBox" id="item_pingjia" style="display: none;">
+		<div class="layout-module">
+			<div class="head">
+				<ul class="head-tab">
+					<li class="current">评价(6)</li>
+				</ul>
+			</div>
+			<div class="body" style="display: none;">
+				<div class="level-mark Left">
+					<div class="score">
+						<strong class="red">5.0</strong>分
+					</div>
+					<div class="star">
+						<span style="width: 100%" class="bar"></span>
+					</div>
+				</div>
+				<div class="level-view Left">
+					<table>
+						<tbody>
+							<tr>
+								<td align="right">满意</td>
+								<td><div class="level">
+										<span style="width: 100%" class="bar"></span>
+									</div></td>
+								<td>100%</td>
+							</tr>
+							<tr>
+								<td align="right">一般</td>
+								<td><div class="level">
+										<span style="width: 0%" class="bar"></span>
+									</div></td>
+								<td>0%</td>
+							</tr>
+							<tr>
+								<td align="right">不满意</td>
+								<td><div class="level">
+										<span style="width: 0%" class="bar"></span>
+									</div></td>
+								<td>0%</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="tip-txt Left">
+					<div class="gold">
+						<a class="btn" title="发评价赢金币" target="_blank" href="/user/?act=comment_list"></a><a class="red" title="什么是金币？"
+							target="_blank" href="http://www.meilele.com/article_cat-6/article-9931.html">什么是金币？</a>
+					</div>
+					<p></p>
+				</div>
+			</div>
+		</div>
+		<div class="mt10" id="JS_comment_box">
+			<div class="filter" style="display: none;">
+				<a class="cm_fliter current" href="javascript:;"><span class="t">全部评价</span>(6)</a><a data-slash="high"
+					class="cm_fliter " href="javascript:;"><span class="t">满意</span>(6)</a><a data-slash="middle" class="cm_fliter "
+					href="javascript:;"><span class="t">一般</span>(0)</a><a data-slash="low" class="cm_fliter " href="javascript:;"><span
+					class="t">不满意</span>(0)</a><a data-slash="only_show" class="cm_fliter xspace " href="javascript:;"><span class="t">秀家</span>(1)</a>
+			</div>
+			<div class="comment-table">
+				<table>
+					<tbody>
+						<tr data-user_name="mll_15601292***" data-comment_id="572066" id="JS_comment_list_572066">
+							<td class="user-label"><div class="avatar">
+									<img width="56" height="56" src="http://image.meilele.com/images/goods/avatar/level4.gif">
+								</div>
+								<p class="name">
+									<span class="">mll_15601292***</span>
+								</p></td>
+							<td class="c-content"><div class="c-tip clearfix">
+									<div class="score Left">
+										<span class="star"><span style="width: 100%;" class="bar"></span></span><span>5分</span>
+									</div>
+									<div class="time Right">2016-05-05 00:05:31发布“评价”</div>
+								</div>
+								<p>几款窗帘中价格最便宜的，但挂上后效果同样很好，底色为蓝灰色，挂在书房很合适。谢谢美乐乐昆山店的小顾，为了买到心仪的家具和窗帘，曾多次反复改动，改价，占用了他很多的时间，徒增了很多工作量，但他从未有半点不耐烦，总是非常耐心地按顾客要求和喜好完成各项订单，认真负责的精神实在可嘉！需要提一下，两位上门安装的师傅也很认真。</p>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="layout-module sale-records" id="item_jilu" style="display: none;">
+		<div class="head">
+			<ul class="head-tab">
+				<li class="current" id="JS_jilu_header_text">已售</li>
+			</ul>
+		</div>
+		<div class="body">
+			<div id="JS_goods_sale_records_list">
+				<table class="records-list">
+					<tbody>
+						<tr>
+							<th width="175" class="nick">会员名</th>
+							<th width="328">商品名称</th>
+							<th width="200">地址</th>
+							<th class="align-c">件数</th>
+							<th width="185" class="align-c">成交时间</th>
+						</tr>
+						<tr>
+							<td class="nick">mll_13987632***</td>
+							<td><div class="goods-name">定制高档窗帘树遮光布料成品欧式卧室客厅 玉树临风 自由蓝</div></td>
+							<td><strong>昆明</strong> 理想小镇55*************</td>
+							<td class="align-c">82</td>
+							<td class="align-c">2016年06月30日</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="page-unit clearfix" id="JS_goods_sale_records_pager">
+				<table>
+					<tbody>
+						<tr>
+							<td><span class="current">1</span></td>
+							<td><a data-page="2" class="record_url" href="javascript:;">2</a></td>
+							<td><a data-page="3" class="record_url" href="javascript:;">3</a></td>
+							<td><a data-page="4" class="record_url" href="javascript:;">4</a></td>
+							<td><a data-page="2" href="javascript:;" class="next record_url">下一页<span class="arrow"><span
+										class="char">◆</span></span></a></td>
+							<td>到第</td>
+							<td><input id="JS_sale_record_page_input" value="1" class="go-num"></td>
+							<td>页</td>
+							<td><a data-page="input" href="javascript:;" class="go">确定</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+</div>

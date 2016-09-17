@@ -47,7 +47,6 @@ router.get('/baiye/:id', function(req, res, next) {
 			title : 'Express',
 			item : body
 		});
-		res.status(200).end();
 	});
 });
 

@@ -39,7 +39,7 @@
 
 <div ng-controller="baiyeListCtrl">
 	<ul class="gallery-wrapper">
-		<li ng-repeat="baiye in baiyes"><a href="#/baiye/detail?id={{baiye._id}}" class="thumbnail"><img
+		<li ng-repeat="baiye in baiyes"><a href="/baiye/{{baiye._id}}" class="thumbnail"><img
 				ng-src="{{baiye.preview}}_280.jpg" width="280px" height="280px" alt="...">{{baiye.title}}</a></li>
 	</ul>
 	<div class="clear">

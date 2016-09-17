@@ -46,7 +46,7 @@ app.use('/admin/', loginRoutes)
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
 	var err = new Error('Not Found');
-	var requestImage = req.headers.accept.startsWith("image");
+	var requestImage = req.url.endsWith(".jpg");
 	if(requestImage&&req.url.startsWith("/data")){
 		var img404 = fs.readFileSync(ROOT_PATH+'/public/images/404/default.jpg');
 		res.writeHead(200, {'Content-Type': 'image/jpg' });
