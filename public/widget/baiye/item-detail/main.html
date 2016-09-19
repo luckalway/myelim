@@ -6,9 +6,9 @@
 			<a data-value="商品详情" id="JS_gd_tab_head_xiangqing" class="first current" href="javascript:;" data-key="xiangqing">商品详情</a><a
 				data-value="规格参数" id="JS_gd_tab_head_guige" href="javascript:;" data-key="guige">规格参数</a><a data-value="评价"
 				style="display: inline-block;" id="JS_gd_tab_head_pingjia" href="javascript:;" data-key="pingjia">评价<span
-				class="red">(0)</span></a><a data-value="已售" style="display: inline-block;" id="JS_gd_tab_head_jilu" href="javascript:;"
-				data-key="jilu">已售<span class="red">(36)</span></a><a data-value="真实案例" style="display: inline-block;"
-				id="JS_gd_tab_head_tiyanguan" href="javascript:;" data-key="anli">真实案例<span class="red">(7)</span></a>
+				class="red">(<%=item.feedback%>)</span></a><a data-value="已售" style="display: inline-block;" id="JS_gd_tab_head_jilu" href="javascript:;"
+				data-key="jilu">已售<span class="red">(<%=item.sold%>)</span></a><a data-value="真实案例" style="display: inline-block;"
+				id="JS_gd_tab_head_tiyanguan" href="javascript:;" data-key="anli">真实案例<span class="red">(<%=item.case%>)</span></a>
 		</div>
 		<div class="side-btn Right">
 			<table>
@@ -31,12 +31,12 @@
 				<tbody>
 					<tr>
 						<td>商品名称：<%= item.title%></td>
-						<td>商品编号：choose-by-003</td>
-						<td>商品品牌：<a class="red" target="_blank" href="/brand-549/">CHOOSE</a></td>
+						<td>商品编号：<%= item.productId%></td>
+						<td>商品品牌：<a class="red" target="_blank" href="/brand-549/"><%= item.brand%></a></td>
 					</tr>
 					<tr>
 						<td>商品材质：其他材质</td>
-						<td>商品重量：1.2kg</td>
+						<td>商品重量：不适用</td>
 						<td>商品产地： 中国浙江</td>
 					</tr>
 					<tr>

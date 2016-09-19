@@ -39,13 +39,21 @@ router.get('/malachiye/baiye', function(req, res, next) {
 	});
 });
 
+function rectifyItem(baiyeItem){
+	baiyeItem.feedback = baiyeItem.feedback||0;
+	baiyeItem.buyerShow = baiyeItem.buyerShow || 0;
+	baiyeItem.sold = baiyeItem.sold || 0;
+	baiyeItem.case = baiyeItem.case || 0;
+	return baiyeItem;
+};
+
 router.get('/baiye/:id', function(req, res, next) {
 	db.get(req.params.id, {
 		revs_info : true
 	}, function(err, body) {
 		res.render('baiye/item-detail', {
 			title : 'Express',
-			item : body
+			item : rectifyItem(body)
 		});
 	});
 });
