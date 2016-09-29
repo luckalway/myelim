@@ -37,8 +37,6 @@ router.get("/baiyes", function(req, res, next) {
 });
 
 router.post('/baiyes/:id/images', function (req, res, next) {
-    // imageVersions are taken from upload.configure()
-	var folderName = new Date().getTime();
     upload.fileHandler({
         uploadDir: function () {
             return global.ROOT_PATH + '/public/data/baiye/' + req.params.id; 

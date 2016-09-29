@@ -13,6 +13,7 @@ global.ROOT_PATH = __dirname;
 global.nano = require('nano')('http://keeper:4753295@114.215.185.21:5984');
 global.db = nano.db.use('vmeifang');
 global.upload = require('jquery-file-upload-middleware');
+global.conf = require('./config');
 
 var routes = require('./routes/index');
 var anliRoutes = require('./routes/api/sold-case.js');
@@ -87,4 +88,9 @@ app.use(jwt({
 }));
 **/
 
+upload.configure({
+    imageVersions: conf.resizeVersion.default
+});
+
 module.exports = app;
+
