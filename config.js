@@ -25,5 +25,8 @@ exports.directors = {
     default_url: '/uploads/default',
 
     location: '/public/uploads/location',
-    location_url: '/uploads/location'
+    location_url: '/uploads/location',
+    
+    upload_image: __dirname + '/public/data',
+    upload_image_url: '/data'
 };

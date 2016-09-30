@@ -22,7 +22,6 @@
 		"jwt-simple": "*",
 		"redis": "*",
 		"express-jwt": "*",
-		"jquery-file-upload-middleware": "*",
 		"jimp": "*"
 	}
 }

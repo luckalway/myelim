@@ -4,6 +4,8 @@ var path = require('path');
 var fs = require("fs");
 const
 url = require('url');
+var BASE_UPLOAD_DIR = global.conf.directors.upload_image + '/baiye/';
+var BASE_UPLOAD_URL = global.conf.directors.upload_image_url + '/baiye/';
 
 var router = express.Router();
 
@@ -36,13 +38,25 @@ router.get("/baiyes", function(req, res, next) {
 	});
 });
 
+router.get('/baiyes/:id/images', function (req, res, next) {
+	var images = fs.readdirSync(path.join(BASE_UPLOAD_DIR, req.params.id));
+	for(var i in images){
+		//all images on the folder have '.'
+		var isFile = images[i].indexOf('.');
+		
+		// TODO 
+		console.log(BASE_UPLOAD_URL + images[i]);
+	}
+});
+
+
 router.post('/baiyes/:id/images', function (req, res, next) {
     upload.fileHandler({
         uploadDir: function () {
-            return global.ROOT_PATH + '/public/data/baiye/' + req.params.id; 
+            return path.join(BASE_UPLOAD_DIR, req.params.id); 
         },
         uploadUrl: function () {
-            return '/data/baiye/' + req.params.id; 
+            return  BASE_UPLOAD_URL + req.params.id; 
         }
     })(req, res, next);
 });
