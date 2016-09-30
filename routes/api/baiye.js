@@ -41,6 +41,11 @@ router.get("/baiyes", function(req, res, next) {
 router.get('/baiyes/:id/images', function (req, res, next) {
 	var folderpath = path.join(BASE_UPLOAD_DIR, req.params.id);	
 	fs.readdir(folderpath, function (err, filenames) {
+		if(!filenames){
+			res.send({'files': []});
+			return;
+		}
+			
 		var files = [];
 		filenames.forEach(function (filename) {
 		  var stats = fs.lstatSync(path.join(folderpath, filename))
@@ -53,7 +58,7 @@ router.get('/baiyes/:id/images', function (req, res, next) {
 		      'deleteType': 'DELETE',
 		      'url': BASE_UPLOAD_URL + req.params.id + '/' + filename,
 		      'deleteUrl': '/api/baiyes/' + req.params.id + '/images/' + filename,
-		      'thumbnailUrl': BASE_UPLOAD_URL + req.params.id + '/thumbnail/' + filename
+		      'thumbnailUrl': BASE_UPLOAD_URL + req.params.id + '/small/' + filename
 		    });
 		  }
 		});

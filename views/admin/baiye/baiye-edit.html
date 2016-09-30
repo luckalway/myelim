@@ -2,24 +2,48 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>jQuery File Upload Demo</title>
+<title>添加/编辑百叶帘</title>
 <meta name="description"
 	content="File Upload widget with multiple file selection, drag&amp;drop support, progress bars, validation and preview images, audio and video for jQuery. Supports cross-domain, chunked and resumable file uploads and client-side image resizing. Works with any server-side platform (PHP, Python, Ruby on Rails, Java, Node.js, Go etc.) that supports standard HTML form file uploads.">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Bootstrap styles -->
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
-<link rel="stylesheet" href="/framework/jquery.fileupload/css/jquery.fileupload.css">
-<link rel="stylesheet" href="/framework/jquery.fileupload/css/jquery.fileupload-ui.css">
+
+<% include ../include/script.html %>
 </head>
 <body>
 	<% include ../include/header.html %>
+	<form role="form" action="/api/baiyes" method="post">
+		<div class="modal-body">
+			<div class="form-group">
+				<label for="name">类型</label> <select class="form-control" id="subType" name="subType" required>
+					<option value="">请选择类型</option>
+					<option value="juan">卷帘</option>
+					<option value="baiye">百叶帘</option>
+					<option value="rousha">柔纱帘</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="name">货号</label> <input id="productId" class="form-control" name="productId" type="text"
+					placeholder="请输入货号" required />
+			</div>
+			<div class="form-group">
+				<label for="name">标题</label> <input id="title" class="form-control" name="title" type="text" placeholder="请输入标题"
+					required />
+			</div>
+			<div class="form-group">
+				<label for="name">价格</label><input type="text" class="form-control" id="price" name="price" placeholder="请输入价格"
+					required />
+			</div>
+			<div class="form-group">
+				<label for="name">计价单位</label> <select class="form-control" id="unit" name="unit" required>
+					<option value="squaremeter">元/平方米</option>
+				</select>
+			</div>
+		</div>
+	</form>
 
-	<div class="container">
-		<br>
-
+	<div class="container" style="display:none;">
 		<!-- The file upload form used as target for the file upload widget -->
-		<form id="fileupload" action="//jquery-file-upload.appspot.com/" method="POST" enctype="multipart/form-data">
+		<form id="fileupload" action="" method="POST" enctype="multipart/form-data">
 			<div class="row fileupload-buttonbar">
 				<div class="col-lg-7">
 					<span class="btn btn-success fileinput-button"> <i class="glyphicon glyphicon-plus"></i> <span>添加图片...</span>
@@ -32,9 +56,8 @@
 						<i class="glyphicon glyphicon-ban-circle"></i> <span>取消上传</span>
 					</button>
 					<button type="button" class="btn btn-danger delete">
-						<i class="glyphicon glyphicon-trash"></i> <span>删除</span>
+						<i class="glyphicon glyphicon-trash"></i> <span>全部删除</span>
 					</button>
-					<input type="checkbox" class="toggle">
 					<!-- The global file processing state -->
 					<span class="fileupload-process"></span>
 				</div>
@@ -97,120 +120,76 @@
 </script>
 	<!-- The template to display files available for download -->
 	<script id="template-download" type="text/x-tmpl">
-{% for (var i=0, file; file=o.files[i]; i++) { %}
-    <tr class="template-download fade">
-        <td>
-            <span class="preview">
-                {% if (file.thumbnailUrl) { %}
-                    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img src="{%=file.thumbnailUrl%}"></a>
-                {% } %}
-            </span>
-        </td>
-        <td>
-            <p class="name">
-                {% if (file.url) { %}
-                    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
-                {% } else { %}
-                    <span>{%=file.name%}</span>
-                {% } %}
-            </p>
-            {% if (file.error) { %}
-                <div><span class="label label-danger">Error</span> {%=file.error%}</div>
-            {% } %}
-        </td>
-        <td>
-            <span class="size">{%=o.formatFileSize(file.size)%}</span>
-        </td>
-        <td>
-            {% if (file.deleteUrl) { %}
-                <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
+{%
+	var fileGroups = [];
+	var files = [];
+	for (var i=0, file; file=o.files[i]; i++){
+		if(i%6 == 0){
+			files = [];
+			files.push(file);
+			fileGroups.push(files);
+		} else {
+			files.push(file);
+		}
+	}	
+ %}
+{% for (var j=0, files; files=fileGroups[j]; j++) { %}
+<div class="row">
+
+{% for (var i=0, file; file=files[i]; i++){ %}
+  <div class="col-sm-6 col-md-2">
+    <div class="thumbnail">
+    {% if (file.thumbnailUrl) { %}
+    	<a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img src="{%=file.thumbnailUrl%}"></a>
+    {% } %}
+      <div class="caption">
+        <span class="size">({%=o.formatFileSize(file.size)%})</span>
+        <p>
+			<button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
                     <i class="glyphicon glyphicon-trash"></i>
-                    <span>Delete</span>
-                </button>
-                <input type="checkbox" name="delete" value="1" class="toggle">
-            {% } else { %}
-                <button class="btn btn-warning cancel">
-                    <i class="glyphicon glyphicon-ban-circle"></i>
-                    <span>Cancel</span>
-                </button>
-            {% } %}
-        </td>
-    </tr>
+            </button>
+		</p>
+      </div>
+    </div>
+  </div>
+{% } %}
+
+</div>
 {% } %}
 </script>
 
 
-	<form role="form" action="/api/baiyes" method="post">
-		<div class="modal-body">
-			<div class="form-group">
-				<label for="name">类型</label> <select class="form-control" id="subType" name="subType" required>
-					<option value="">请选择类型</option>
-					<option value="juan">卷帘</option>
-					<option value="baiye">百叶帘</option>
-					<option value="rousha">柔纱帘</option>
-				</select>
-			</div>
-			<div class="form-group">
-				<label for="name">货号</label> <input id="productId" class="form-control" name="productId" type="text"
-					placeholder="请输入货号" required />
-			</div>
-			<div class="form-group">
-				<label for="name">标题</label> <input id="title" class="form-control" name="title" type="text" placeholder="请输入标题"
-					required />
-			</div>
-			<div class="form-group">
-				<label for="name">价格</label><input type="text" class="form-control" id="price" name="price" placeholder="请输入价格"
-					required />
-			</div>
-			<div class="form-group">
-				<label for="name">计价单位</label> <select class="form-control" id="unit" name="unit" required>
-					<option value="squaremeter">元/平方米</option>
-				</select>
-			</div>
-			<div class="form-group">
-				<!-- Add Files Button -->
-				<span class="btn btn-success fileinput-button" style="display: none"> <i class="glyphicon glyphicon-plus"></i><span>添加图片...</span>
-					<input id="fileupload" type="file" name="images[]" multiple>
-				</span>
-			</div>
-		</div>
-		<div class="modal-footer">
-			<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-			<button type="submit" class="btn btn-primary" value="提交更改">提交更改</button>
-		</div>
-	</form>
 
-	<script src="/framework/jquery-2.2.2.js"></script>
-	<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
-	<script src="/framework/jquery.fileupload/js/vendor/jquery.ui.widget.js"></script>
-	<!-- The Templates plugin is included to render the upload/download listings -->
-	<script src="//blueimp.github.io/JavaScript-Templates/js/tmpl.min.js"></script>
-	<!-- The Load Image plugin is included for the preview images and image resizing functionality -->
-	<script src="//blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>
-	<!-- The Canvas to Blob plugin is included for image resizing functionality -->
-	<script src="//blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
-	<!-- Bootstrap JS is not required, but included for the responsive demo navigation -->
-	<script src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-	<!-- blueimp Gallery script -->
-	<script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
-	<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
-	<script src="/framework/jquery.fileupload/js/jquery.iframe-transport.js"></script>
-	<!-- The basic File Upload plugin -->
-	<script src="/framework/jquery.fileupload/js/jquery.fileupload.js"></script>
-	<!-- The File Upload processing plugin -->
-	<script src="/framework/jquery.fileupload/js/jquery.fileupload-process.js"></script>
-	<!-- The File Upload image preview & resize plugin -->
-	<script src="/framework/jquery.fileupload/js/jquery.fileupload-image.js"></script>
-	<!-- The File Upload audio preview plugin -->
-	<script src="/framework/jquery.fileupload/js/jquery.fileupload-audio.js"></script>
-	<!-- The File Upload video preview plugin -->
-	<script src="/framework/jquery.fileupload/js/jquery.fileupload-video.js"></script>
-	<!-- The File Upload validation plugin -->
-	<script src="/framework/jquery.fileupload/js/jquery.fileupload-validate.js"></script>
-	<!-- The File Upload user interface plugin -->
-	<script src="/framework/jquery.fileupload/js/jquery.fileupload-ui.js"></script>
-	<!-- The main application script -->
-	<script src="/framework/jquery.fileupload/js/main.js"></script>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-primary" value="提交更改">提交更改</button>
+	</div>
+
+	<script type="text/javascript">
+		$('#fileupload').fileupload({});
+	
+		$("#productId").change(function() {
+			if ($("#productId").val() == "") {
+				$(".container").hide();
+			} else {
+				$(".container").show();
+				$('#fileupload').fileupload('option', 'url', "/api/baiyes/" + $("#productId").val() + "/images");
+			}
+		});
+		$("#productId").change();
+
+		$('#fileupload').addClass('fileupload-processing');
+		$.ajax({
+			url : $('#fileupload').fileupload('option', 'url'),
+			dataType : 'json',
+			context : $('#fileupload')[0]
+		}).always(function() {
+			$(this).removeClass('fileupload-processing');
+		}).done(function(result) {
+			$(this).fileupload('option', 'done').call(this, $.Event('done'), {
+				result : result
+			});
+		});
+	</script>
 
 	<% include ../../include/footer.html %>
 </body>
