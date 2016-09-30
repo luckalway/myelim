@@ -20,7 +20,7 @@ router.get('/malachiye', function(req, res, next) {
 	});
 });
 
-router.get('/malachiye/baiye', function(req, res, next) {
+router.get('/malachiye/baiyes', function(req, res, next) {
 	db.view("sold_cases", "baiyes", function(err, body) {
 		if (!err) {
 			var baiyes = [];
@@ -47,15 +47,28 @@ function rectifyItem(baiyeItem){
 	return baiyeItem;
 };
 
+router.get('/malachiye/baiyes/add', function(req, res, next) {
+	res.render('admin/baiye/baiye-edit', {
+	});
+});
+
 router.get('/baiye/:id', function(req, res, next) {
 	db.get(req.params.id, {
 		revs_info : true
 	}, function(err, body) {
 		res.render('baiye/item-detail', {
-			title : 'Express',
 			item : rectifyItem(body)
 		});
 	});
 });
+
+
+
+
+router.get('/upload',function(req, res, next){
+	res.render('basic-plus', {
+		
+	});
+})
 
 module.exports = router;

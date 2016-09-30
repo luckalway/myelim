@@ -10,8 +10,9 @@ var secret = require('./config/secret.js');
 var fs = require("fs");
 
 global.ROOT_PATH = __dirname;
-global.nano = require('nano')('http://keeper:4753295@114.215.185.21:5984');
-global.db = nano.db.use('vmeifang');
+global.nano = require('nano')(require('./env').couchdb.url);
+
+global.db = nano.db.use(require('./env').couchdb.db);
 global.upload = require('./custom_node_modules/jquery-file-upload-middleware');
 global.conf = require('./config');
 
@@ -37,6 +38,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'temp')));
 
 app.use('/', routes);
 app.use('/api/', anliRoutes);
@@ -90,6 +92,10 @@ app.use(jwt({
 
 upload.configure({
     imageVersions: conf.resizeVersion.default
+});
+
+process.on('uncaughtException', function (error) {
+	console.log(error.stack);
 });
 
 module.exports = app;

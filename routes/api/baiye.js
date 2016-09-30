@@ -39,14 +39,28 @@ router.get("/baiyes", function(req, res, next) {
 });
 
 router.get('/baiyes/:id/images', function (req, res, next) {
-	var images = fs.readdirSync(path.join(BASE_UPLOAD_DIR, req.params.id));
-	for(var i in images){
-		//all images on the folder have '.'
-		var isFile = images[i].indexOf('.');
-		
-		// TODO 
-		console.log(BASE_UPLOAD_URL + images[i]);
-	}
+	var folderpath = path.join(BASE_UPLOAD_DIR, req.params.id);	
+	fs.readdir(folderpath, function (err, filenames) {
+		var files = [];
+		filenames.forEach(function (filename) {
+		  var stats = fs.lstatSync(path.join(folderpath, filename))
+		  if (stats.isFile()) {
+		    files.push({
+		      'name': filename,
+		      'originalName': filename,
+		      'size': stats.size,
+		      'type': 'image/jpeg',
+		      'deleteType': 'DELETE',
+		      'url': BASE_UPLOAD_URL + req.params.id + '/' + filename,
+		      'deleteUrl': '/api/baiyes/' + req.params.id + '/images/' + filename,
+		      'thumbnailUrl': BASE_UPLOAD_URL + req.params.id + '/thumbnail/' + filename
+		    });
+		  }
+		});
+		res.send({
+		  'files': files
+		});
+	});
 });
 
 
@@ -61,13 +75,22 @@ router.post('/baiyes/:id/images', function (req, res, next) {
     })(req, res, next);
 });
 
+router.delete('/baiyes/:id/images/:name', function (req, res, next) {
+	fs.unlinkSync(path.join(BASE_UPLOAD_DIR, req.params.id, req.params.name));
+	for(var key in conf.resizeVersion.default){
+		fs.unlinkSync(path.join(BASE_UPLOAD_DIR, req.params.id, key, req.params.name));
+		console.log(path.join(BASE_UPLOAD_DIR, req.params.id, key, req.params.name));
+	}
+	res.status(200).end();
+});
+
 router.post("/baiyes", function(req, res, next) {
-	var folderPath = path.join(global.ROOT_PATH, '/public/data/baiye/', req.body.productId);
+	var folderPath = path.join(BASE_UPLOAD_DIR, req.body.productId);
 	var allImages = fs.readdirSync(folderPath);
 	var images = [];
-	var baseUrl = url.resolve('/data/baiye/', req.body.productId);
+	var baseUrl = url.resolve(BASE_UPLOAD_URL, req.body.productId);
 	allImages.forEach(function(image) {
-		if (/^[0-9]+\.jpg$/.exec(image)) {
+		if (/.+\.jpg$/.exec(image)) {
 			images.push(baseUrl + "/" + image);
 		}
 	});
