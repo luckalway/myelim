@@ -1,3 +1,5 @@
+var path = require('path');
+
 exports.resizeVersion = {
     default: {
         thumbnail:{
@@ -30,3 +32,14 @@ exports.directors = {
     upload_image: __dirname + '/public/data',
     upload_image_url: '/data'
 };
+
+exports.image = {
+		getImageLocalPath:function(url){
+			var localPath = path.join(__dirname,'public',url);
+			return localPath;
+		},
+		getOriginImageLocalPath:function(url){
+			var localPath = this.getImageLocalPath(url);
+			return localPath.replace(/_(thumbnail|smaller|small|medium|large)\.jpg$/,'');
+		}
+}

@@ -90,36 +90,36 @@ router.delete('/baiyes/:id/images/:name', function (req, res, next) {
 });
 
 router.post("/baiyes", function(req, res, next) {
-	var folderPath = path.join(BASE_UPLOAD_DIR, req.body.productId);
-	var allImages = fs.readdirSync(folderPath);
-	var images = [];
-	var baseUrl = url.resolve(BASE_UPLOAD_URL, req.body.productId);
-	allImages.forEach(function(image) {
-		if (/.+\.jpg$/.exec(image)) {
-			images.push(baseUrl + "/" + image);
-		}
-	});
-
 	var baiye = {
 		productId : req.body.productId,
 		price : req.body.price,
 		unit : req.body.unit,
-		images : images,
-		preview : baseUrl + "/preview.jpg",
 		subType : req.body.subType,
 		type : "baiye"
 	}
 
 	db.insert(baiye);
-	res.redirect('/malachiye#/baiye');
+	res.redirect('/malachiye/baiyes');
 });
 
 router.get("/baiyes/:id", function(req, res, next) {
 	db.get(req.params.id, {
 		revs_info : true
 	}, function(err, body) {
-		res.send(body);
-		res.status(200).end();
+		var folderpath = path.join(BASE_UPLOAD_DIR, body.productId);	
+		fs.readdir(folderpath, function (err, filenames) {
+			var images = [];
+			filenames.forEach(function (filename) {
+				  var stats = fs.lstatSync(path.join(folderpath, filename))
+				  if (stats.isFile()) {
+				    images.push(BASE_UPLOAD_URL + req.params.id + '/' + filename);
+				  }
+			});
+			body.images = images;
+			body.preview = BASE_UPLOAD_URL + req.params.id + '/preview.jpg';
+			res.send(body);
+			res.status(200).end();
+		});
 	});
 });
 

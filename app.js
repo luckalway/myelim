@@ -8,6 +8,7 @@ var ejs = require('ejs');
 var jwt = require('express-jwt');
 var secret = require('./config/secret.js');
 var fs = require("fs");
+var jimp = require("jimp");
 
 global.ROOT_PATH = __dirname;
 global.nano = require('nano')(require('./env').couchdb.url);
@@ -17,9 +18,10 @@ global.upload = require('./custom_node_modules/jquery-file-upload-middleware');
 global.conf = require('./config');
 
 var routes = require('./routes/index');
+var baiyeRoutes = require('./routes/baiye.js');
 var anliRoutes = require('./routes/api/sold-case.js');
 var peijianRoutes = require('./routes/api/peijian.js');
-var baiyeRoutes = require('./routes/api/baiye.js');
+var baiyeAdminRoutes = require('./routes/api/baiye.js');
 var loginRoutes = require('./routes/admin/login.js');
 
 var app = express();
@@ -41,23 +43,34 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'temp')));
 
 app.use('/', routes);
+app.use('/', baiyeRoutes);
 app.use('/api/', anliRoutes);
 app.use('/api/', peijianRoutes);
-app.use('/api/', baiyeRoutes);
+app.use('/api/', baiyeAdminRoutes);
 app.use('/admin/', loginRoutes)
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-	var err = new Error('Not Found');
-	var requestImage = req.url.endsWith(".jpg");
-	if(requestImage&&req.url.startsWith("/data")){
-		var img404 = fs.readFileSync(ROOT_PATH+'/public/images/404/default.jpg');
-		res.writeHead(200, {'Content-Type': 'image/jpg' });
-		res.end(img404, 'binary');
-	}else{
-		err.status = 404;
-		next(err);
+// if can not find a available image
+app.get(/\/data\/.*\.jpg$/, function(req, res, next) {
+	var matchedArray =/.+\.jpg_([a-z]+)\.jpg$/.exec(req.url);  
+	if(matchedArray){
+		var imageType = matchedArray[1];
+		var opts = conf.resizeVersion.default[imageType];
+		if(opts){
+			//TODO
+            jimp.read(config.image.getOriginImageLocalPath(req.url), function (err, image) {
+                if (err) 
+                	throw err;
+                
+                var width = opts.width < image.bitmap.width ? opts.width : image.bitmap.width;
+                image.resize(width, opts.height || jimp.AUTO).write(config.image.getImageLocalPath(req.url));
+                
+            });
+		}
 	}
+	
+	var img404 = fs.readFileSync(ROOT_PATH+'/public/images/404/default.jpg');
+	res.writeHead(200, {'Content-Type': 'image/jpg' });
+	res.end(img404, 'binary');
 });
 
 // error handlers
