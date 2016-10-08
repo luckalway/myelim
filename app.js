@@ -15,7 +15,8 @@ global.nano = require('nano')(require('./env').couchdb.url);
 
 global.db = nano.db.use(require('./env').couchdb.db);
 global.upload = require('./custom_node_modules/jquery-file-upload-middleware');
-global.conf = require('./config');
+var conf = require('./config');
+global.conf = conf;
 
 var routes = require('./routes/index');
 var baiyeRoutes = require('./routes/baiye.js');
@@ -52,31 +53,38 @@ app.use('/admin/', loginRoutes)
 // if can not find a available image
 app.get(/\/data\/.*\.jpg$/, function(req, res, next) {
 	var matchedArray =/.+\.jpg_([a-z]+)\.jpg$/.exec(req.url);  
+	var notFound = true;
 	if(matchedArray){
 		var imageType = matchedArray[1];
 		var opts = conf.resizeVersion.default[imageType];
 		if(opts){
-			//TODO
-            jimp.read(config.image.getOriginImageLocalPath(req.url), function (err, image) {
+			notFound = false; 
+            jimp.read(conf.image.getOriginImageLocalPath(req.url), function (err, image) {
                 if (err) 
                 	throw err;
                 
                 var width = opts.width < image.bitmap.width ? opts.width : image.bitmap.width;
-                image.resize(width, opts.height || jimp.AUTO).write(config.image.getImageLocalPath(req.url));
-                
+                image.resize(width, opts.height || jimp.AUTO).write(conf.image.getImageLocalPath(req.url), function(){
+                	res.writeHead(200, {'Content-Type': 'image/jpg' });
+                	res.end(fs.readFileSync(conf.image.getImageLocalPath(req.url)), 'binary');
+                	return;
+                });
             });
 		}
 	}
 	
-	var img404 = fs.readFileSync(ROOT_PATH+'/public/images/404/default.jpg');
-	res.writeHead(200, {'Content-Type': 'image/jpg' });
-	res.end(img404, 'binary');
+	if(notFound){
+		var img404 = fs.readFileSync(ROOT_PATH+'/public/images/404/default.jpg');
+		res.writeHead(200, {'Content-Type': 'image/jpg' });
+		res.end(img404, 'binary');		
+	}
 });
 
 // error handlers
 
 // development error handler
 // will print stacktrace
+
 if (app.get('env') === 'development') {
 	app.use(function(err, req, res, next) {
 		res.status(err.status || 500);
@@ -90,6 +98,7 @@ if (app.get('env') === 'development') {
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
+	console.log(err.stack);
 	res.status(err.status || 500);
 	res.render('error', {
 		message : err.message,
@@ -104,11 +113,7 @@ app.use(jwt({
 **/
 
 upload.configure({
-    imageVersions: conf.resizeVersion.default
-});
-
-process.on('uncaughtException', function (error) {
-	console.log(error.stack);
+    //imageVersions: conf.resizeVersion.default
 });
 
 module.exports = app;

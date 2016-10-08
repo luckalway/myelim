@@ -2,10 +2,10 @@ var express = require('express');
 var multer = require('multer');
 var path = require('path');
 var fs = require("fs");
-const
-url = require('url');
+var url = require('url');
 var BASE_UPLOAD_DIR = global.conf.directors.upload_image + '/baiye/';
 var BASE_UPLOAD_URL = global.conf.directors.upload_image_url + '/baiye/';
+var rmdir = require('rmdir');
 
 var router = express.Router();
 
@@ -81,11 +81,14 @@ router.post('/baiyes/:id/images', function (req, res, next) {
 });
 
 router.delete('/baiyes/:id/images/:name', function (req, res, next) {
-	fs.unlinkSync(path.join(BASE_UPLOAD_DIR, req.params.id, req.params.name));
-	for(var key in conf.resizeVersion.default){
-		fs.unlinkSync(path.join(BASE_UPLOAD_DIR, req.params.id, key, req.params.name));
-		console.log(path.join(BASE_UPLOAD_DIR, req.params.id, key, req.params.name));
-	}
+	fs.readdir(path.join(BASE_UPLOAD_DIR, req.params.id), function (err, filenames) {
+		filenames = filenames||[];
+		filenames.forEach(function(filename){
+			if(filename.startsWith(req.params.name)){
+				fs.unlinkSync(path.join(BASE_UPLOAD_DIR, req.params.id, filename));
+			}
+		});
+	});
 	res.status(200).end();
 });
 
@@ -109,9 +112,9 @@ router.get("/baiyes/:id", function(req, res, next) {
 		var folderpath = path.join(BASE_UPLOAD_DIR, body.productId);	
 		fs.readdir(folderpath, function (err, filenames) {
 			var images = [];
+			filenames = filenames || [];
 			filenames.forEach(function (filename) {
-				  var stats = fs.lstatSync(path.join(folderpath, filename))
-				  if (stats.isFile()) {
+				  if (!/.+\.jpg_([a-z]+)\.jpg$/.test(filename)) {
 				    images.push(BASE_UPLOAD_URL + req.params.id + '/' + filename);
 				  }
 			});
@@ -127,13 +130,10 @@ router.delete("/baiyes/:id", function(req, res, next) {
 	db.get(req.params.id, {
 		revs_info : true
 	}, function(err, body) {
-		console.log(body);
 		if (!err) {
-			db.destroy(body._id, body._rev, function(err, body) {
-				if (!err)
-					console.log(body);
-				res.status(200).end();
-			});
+			rmdir(path.join(BASE_UPLOAD_DIR, body.productId));
+			db.destroy(body._id, body._rev);
+			res.status(200).end();
 		}
 	});
 });

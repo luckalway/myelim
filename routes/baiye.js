@@ -6,6 +6,12 @@ var fs = require("fs");
 var BASE_UPLOAD_DIR = global.conf.directors.upload_image + '/baiye/';
 var BASE_UPLOAD_URL = global.conf.directors.upload_image_url + '/baiye/';
 
+var VALUE_MAP = {
+		squaremeter : "元/平方米",
+		baiye : "百叶帘",
+		juan : "卷帘",
+		rousha : "柔纱帘"
+};
 
 router.get('/malachiye/baiyes', function(req, res, next) {
 	db.view("sold_cases", "baiyes", function(err, body) {
@@ -44,9 +50,13 @@ router.get('/baiyes/:id', function(req, res, next) {
 		revs_info : true
 	}, function(err, body) {
 		var folderpath = path.join(BASE_UPLOAD_DIR, body.productId);
-		console.log(folderpath);
 		fs.readdir(folderpath, function (err, filenames) {
 			var images = [];
+			if(!filenames){
+				filenames = [];
+				console.warn("Can not found images of item["+req.params.id+"]");
+			}
+			
 			filenames.forEach(function (filename) {
 				  var stats = fs.lstatSync(path.join(folderpath, filename))
 				  if (stats.isFile()) {
