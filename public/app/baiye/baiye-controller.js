@@ -1,5 +1,6 @@
 app.controller('baiyeListCtrl', function($scope, $http) {
 	$http.get("/api/baiyes").success(function(response) {
+		console.log(response);
 		$scope.baiyes = response;
 	});
 });

@@ -27,10 +27,12 @@ router.get("/baiyes", function(req, res, next) {
 			var docs = [];
 			var limit = req.query.limit || 100;
 			body.rows.forEach(function(doc) {
+				var item = doc.value;
 				if (docs.length < limit) {
-					doc.value.unitDisplay = VALUE_MAP[doc.value.unit];
-					doc.value.subTypeDisplay = VALUE_MAP[doc.value.subType];
-					docs.push(doc.value);
+					item.unitDisplay = VALUE_MAP[item.unit];
+					item.subTypeDisplay = VALUE_MAP[item.subType];
+					item.preview = BASE_UPLOAD_URL + item.productId + '/preview.jpg'
+					docs.push(item);
 				}
 			});
 			res.send(docs);

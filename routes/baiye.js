@@ -58,9 +58,8 @@ router.get('/baiyes/:id', function(req, res, next) {
 			}
 			
 			filenames.forEach(function (filename) {
-				  var stats = fs.lstatSync(path.join(folderpath, filename))
-				  if (stats.isFile()) {
-				    images.push(BASE_UPLOAD_URL + req.params.id + '/' + filename);
+				  if (!/.+\.jpg_([a-z]+)\.jpg$/.test(filename)) {
+				    images.push(BASE_UPLOAD_URL + body.productId + '/' + filename);
 				  }
 			});
 			body.images = images;

@@ -1,4 +1,5 @@
 var path = require('path');
+var querystring = require("querystring");
 
 exports.resizeVersion = {
     default: {
@@ -35,7 +36,8 @@ exports.directors = {
 
 exports.image = {
 		getImageLocalPath:function(url){
-			var localPath = path.join(__dirname,'public',url);
+			var localPath = path.join(__dirname,'public',querystring.unescape(url));
+			console.log(localPath);
 			return localPath;
 		},
 		getOriginImageLocalPath:function(url){
