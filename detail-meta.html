@@ -1,0 +1,499 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta charset="UTF-8" />
+
+<style>
+body {
+	font-family: tahoma, arial, 微软雅黑, sans-serif;
+}
+
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li,
+	pre, form, fieldset, legend, button, input, textarea, th, td {
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	text-decoration: none;
+}
+
+.box::after, .clear::after, .clearfix::after, .col-extra::after,
+	.col-sub::after, .layout::after, .main-wrap::after, .tb-clearfix::after,
+	.tm-clear::after {
+	clear: both;
+	content: " ";
+	display: block;
+	height: 0;
+}
+
+.tb-detail-hd h1 {
+	color: #000;
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 1;
+	padding-bottom: 0.2em;
+}
+
+.tb-detail-hd .newp {
+	color: #dd2727;
+	font-size: 14px;
+}
+
+#detail .tb-gallery {
+	float: left;
+	margin-left: -100%;
+	position: relative;
+	width: 460px;
+}
+
+#detail .tb-property {
+	float: left;
+	width: 100%;
+}
+
+.tm-detail-meta {
+	min-height: 600px;
+	position: relative;
+	width: 990px;
+	z-index: 100;
+}
+
+#detail .tb-property {
+	float: left;
+	width: 100%;
+}
+
+#detail .tb-gallery {
+	float: left;
+	margin-left: -100%;
+	position: relative;
+	width: 460px;
+}
+
+#detail .tb-wrap {
+	color: #666;
+	margin: 0 0 0 460px;
+	padding: 0 0 10px;
+}
+
+.tb-prop dd {
+	float: left;
+	width: 420px;
+}
+
+.tb-detail-sellpoint {
+	color: #204ad7;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 18px;
+}
+
+#detail .tm-fcs-panel {
+	background-color: #e9e9e9;
+	background-repeat: no-repeat;
+	font: 12px/1.5 "Microsoft Yahei", tahoma, arial;
+	left: 0;
+	margin-right: 20px;
+	position: relative;
+	z-index: 10;
+	padding: 10px;
+}
+
+.tb-detail-hd {
+	color: #000;
+	padding: 20px 10px 12px;
+}
+
+#detail .tb-meta {
+	margin: 5px 20px 5px 0;
+}
+
+#detail .tb-wrap {
+	color: #666;
+}
+
+.tm-ind-panel {
+	-moz-border-bottom-colors: none;
+	-moz-border-left-colors: none;
+	-moz-border-right-colors: none;
+	-moz-border-top-colors: none;
+	border-color: #c9c9c9;
+	border-image: none;
+	border-style: dotted;
+	border-width: 1px 0;
+	clear: both;
+	display: flex;
+	margin: -1px 20px 0 0;
+	overflow: hidden;
+	padding: 10px 0;
+	position: relative;
+}
+
+.tm-ind-item {
+	border-left: 1px solid #e5dfda;
+	flex: 1 1 0;
+	float: left;
+	left: -1px;
+	line-height: 16px;
+	position: relative;
+	text-align: center;
+	width: 33%;
+}
+
+.tm-ind-item {
+	line-height: 16px;
+	text-align: center;
+}
+
+.tm-ind-item .tm-label, .tm-ind-item .tm-monthavg {
+	color: #999;
+	display: inline-block;
+	height: 16px;
+	line-height: 16px;
+}
+
+.tm-ind-panel .tm-count {
+	color: #c40000;
+	display: inline-block;
+	font-weight: 700;
+	height: 16px;
+	line-height: 16px;
+	margin-left: 3px;
+}
+
+.tb-key {
+	margin: 0 20px 24px 10px;
+}
+
+.tb-skin {
+	padding: 10px 0;
+}
+
+.tb-key .tb-metatit {
+	color: #838383;
+}
+
+.tm-img-prop dt {
+	margin-top: 8px;
+}
+
+.tm-sale-prop li {
+	line-height: 28px;
+}
+
+.tb-prop li {
+	float: left;
+	line-height: 20px;
+	margin: 0 4px 4px 0;
+	padding: 1px;
+	position: relative;
+	vertical-align: middle;
+}
+
+.tb-action {
+	clear: both;
+	margin: 10px 0 0;
+	padding: 10px 0 0 66px;
+}
+
+.tb-btn-sku {
+	float: left;
+	margin-right: 10px;
+}
+
+#detail .tb-btn-sku a {
+	background-color: #ffeded;
+	border: 1px solid #c40000;
+	color: #c40000;
+	float: left;
+	font-family: "Microsoft Yahei";
+	font-size: 16px;
+	height: 38px;
+	line-height: 38px;
+	margin-right: 0;
+	overflow: hidden;
+	position: relative;
+	text-align: center;
+	width: 178px;
+}
+
+.tb-gallery .tb-thumb {
+	margin-left: -16px;
+	overflow: hidden;
+	text-align: center;
+}
+
+.tb-gallery .tb-thumb li {
+	display: inline-block;
+	margin: 0 0 0 16px;
+	padding-top: 22px;
+}
+
+.tb-gallery .tm-action .favorite i, .tb-gallery .tm-action .iShare i {
+	color: #baaa99;
+	font-family: tm-detail-font;
+	font-style: normal;
+	margin-right: 4px;
+	text-decoration: none;
+}
+
+.tb-prop .tb-img li.tb-txt a {
+	padding: 0 5px;
+	width: auto !important;
+}
+
+.tb-prop .tb-img li a {
+	background-position: center center;
+	background-repeat: no-repeat;
+	height: 38px;
+	line-height: 38px;
+	outline: 0 none;
+	padding: 0;
+	width: 38px !important;
+}
+
+.tm-ser {
+	margin: 0 20px;
+	padding-bottom: 20px;
+	position: relative;
+}
+
+.tm-ser dl {
+	margin-right: 67px;
+}
+
+#detail .tb-metatit {
+	float: left;
+	text-align: left;
+	width: 66px;
+}
+
+.tm-ser .tm-laysku-dd {
+	float: none;
+	margin-left: 66px;
+	width: auto;
+}
+
+.tm-ser .tb-serPromise li {
+	display: inline-block;
+	padding-bottom: 5px;
+	padding-right: 20px;
+	white-space: nowrap;
+}
+
+.tm-ser .tb-serPromise a {
+	color: #666;
+	display: inline-block;
+	margin: 0 10px 0 0;
+	padding: 0 2px 0 0;
+	white-space: nowrap;
+}
+
+#detail .tm-fcs-panel, #detail .tm-fcs-panel dl.tm-shopPromo-panel .tm-floater-Box .fold .hd
+	{
+	background-image:
+		url("data:image/png;base64,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");
+}
+
+.tm-coupon-panel {
+	height: 35px;
+	margin: 0 10px 0 8px;
+	position: relative;
+}
+
+#detail .tm-fcs-panel dl dd {
+	color: #333;
+	font-family: Arial;
+	margin-left: 70px;
+}
+
+.tm-promo-panel .tm-promo-price {
+	font-size: 12px;
+	line-height: 24px;
+	position: relative;
+}
+
+#detail .tm-promo-panel.tm-promo-cur .tm-promo-price .tm-yen {
+	color: #c40000;
+	font-family: Arial;
+	font-size: 18px;
+	vertical-align: middle;
+}
+
+#detail .tm-promo-panel.tm-promo-cur .tm-promo-price .tm-price {
+	color: #c40000;
+	font-family: Arial;
+	font-size: 30px;
+	font-weight: bolder;
+	vertical-align: middle;
+}
+
+.tb-prop li a {
+	background-color: #fff;
+	border: 1px solid #b8b7bd;
+	color: #000;
+	float: left;
+	min-width: 10px;
+	padding: 0 9px;
+	text-align: center;
+	text-decoration: none;
+	white-space: nowrap;
+	width: auto !important;
+}
+
+ul, ol {
+	list-style: outside none none;
+}
+
+.tm-price-panel .tm-price {
+	font-size: 14px;
+	text-decoration: line-through;
+}
+</style>
+
+</head>
+
+
+<body>
+	<div id="detail">
+		<div id="J_DetailMeta" class="tm-detail-meta tm-clear" role="form">
+			<div class="tm-clear">
+				<div class="tb-property">
+					<div class="tb-wrap">
+						<div class="tb-detail-hd">
+							<h1>格丽斯防水百叶窗帘办公室卧室卷帘卫生间帘全遮光木百叶窗百叶帘</h1>
+							<p class="newp">新一循环系统 高轨省力系统 制作 防晒 防水</p>
+							<h4 class="tb-detail-sellpoint">
+								商家承诺：购买“上门安装”服务，如未履行服务最高可获得200元赔付<a class="tm-help" title="窗帘上门安装" target="_blank"
+									href="//www.tmall.com/wow/baihuo/act/chuanglian?spm=a220o.1000855.1000987.2.cpHwLg">?</a>
+							</h4>
+						</div>
+						<!--引入normalBasic-->
+						<div class="tm-fcs-panel">
+							<dl class="tm-price-panel" id="J_StrPriceModBox">
+								<dt class="tb-metatit">价格</dt>
+								<dd>
+									<em class="tm-yen">¥</em> <span class="tm-price">304.00-312.00</span>
+								</dd>
+							</dl>
+							<dl class="tm-promo-panel tm-promo-cur" id="J_PromoPrice" data-label="促销价">
+								<dt class="tb-metatit" style="">促销价</dt>
+								<dd>
+									<div class="tm-promo-price">
+										<em class="tm-yen">¥</em> <span class="tm-price">139.00-143.00</span> &nbsp;&nbsp;
+									</div>
+									<p></p>
+								</dd>
+							</dl>
+							<dl class="tm-shopPromo-panel"></dl>
+						</div>
+						<ul class="tm-ind-panel">
+							<li class="tm-ind-item tm-ind-sellCount " data-label="月销量"><div class="tm-indcon">
+									<span class="tm-label">月销量</span><span class="tm-count">315</span>
+								</div></li>
+							<li class="tm-ind-item tm-ind-reviewCount canClick tm-line3" id="J_ItemRates"><div class="tm-indcon">
+									<span class="tm-label">累计评价</span><span class="tm-count">2311</span>
+								</div></li>
+
+							<li class="tm-ind-item tm-ind-emPointCount"><div class="tm-indcon">
+									<a href="//vip.tmall.com/vip/index.htm" target="_blank"><span class="tm-label">送天猫积分</span><span
+										class="tm-count">69<span>起</span></span></a>
+								</div></li>
+						</ul>
+
+						<div class="tb-key">
+							<div class="tb-skin">
+								<div class="tb-sku">
+									<dl class="tb-prop tm-sale-prop tm-clear tm-img-prop ">
+										<dt class="tb-metatit">颜色分类</dt>
+										<dd>
+											<ul data-property="颜色分类" class="tm-clear J_TSaleProp tb-img">
+												<li title="50mm叶片（梯绳式）" class="tb-txt"><a href="#" role="button" tabindex="0"> <span>50mm叶片（梯绳式）</span>
+												</a></li>
+												<li title="50mm叶片（宽布式）" class="tb-txt"><a href="#" role="button" tabindex="0"> <span>50mm叶片（宽布式）</span>
+												</a></li>
+											</ul>
+										</dd>
+									</dl>
+									<dl class="tb-amount tm-clear">
+										<dt class="tb-metatit">数量</dt>
+										<dd id="J_Amount">
+											<span class="tb-amount-widget mui-amount-wrap"> <input class="tb-text mui-amount-input" value="1"
+												maxlength="8" title="请输入购买量" type="text"> <span class="mui-amount-btn"> <span
+													class="mui-amount-increase"></span> <span class="mui-amount-decrease"></span>
+											</span> <span class="mui-amount-unit">件</span>
+											</span> <em id="J_EmStock" class="tb-hidden" style="display: inline;">库存2940件</em> <span id="J_StockTips"> </span>
+										</dd>
+									</dl>
+
+									<div class="tb-action tm-clear">
+										<div class="tb-btn-buy tb-btn-sku">
+											<a id="J_LinkBuy" href="#" rel="nofollow" data-addfastbuy="true" title="点击此按钮，到下一步确认购买信息。" role="button">立即购买</a>
+										</div>
+										<div class="tb-btn-add tb-btn-sku tb-hidden">
+											<a href="#" rel="nofollow" id="J_LinkAdd" role="button"><i></i>加入购物车</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="tm-ser tm-clear">
+							<dl class="tm-clear">
+								<dt class="tb-metatit">服务承诺</dt>
+								<dd class="tm-laysku-dd">
+									<ul class="tb-serPromise">
+										<li>正品保证</li>
+									</ul>
+								</dd>
+							</dl>
+						</div>
+					</div>
+				</div>
+				<div class="tb-gallery">
+					<div class="tb-booth">
+						<a href="javascript:void(0);"><span class="ks-imagezoom-wrap"><img id="J_ImgBooth"
+								alt="格丽斯防水百叶窗帘办公室卧室卷帘卫生间帘全遮光木百叶窗百叶帘"
+								src="https://img.alicdn.com/imgextra/i2/TB1chvmNpXXXXbyXXXXXXXXXXXX_!!0-item_pic.jpg_430x430q90.jpg"
+								data-haszoom="700"><span
+								style="position: absolute; top: 200.595px; left: 200.095px; width: 218.405px; height: 218.405px; display: none;"
+								class="ks-imagezoom-lens"></span></span> </a>
+					</div>
+					<ul id="J_UlThumb" class="tb-thumb tm-clear">
+						<li class=""><a href="#"><img
+								src="http://img.alicdn.com/bao/uploaded/i4/TB1i9yvNFXXXXXMaXXXXXXXXXXX_!!0-item_pic.jpg_60x60q90.jpg"
+								alt="商品预览图"></a></li>
+						<li class="tb-selected"><a href="#"><img
+								src="http://img.alicdn.com/imgextra/i2/TB1chvmNpXXXXbyXXXXXXXXXXXX_!!0-item_pic.jpg_60x60q90.jpg" alt="商品预览图"></a>
+						</li>
+						<li class=""><a href="#"><img
+								src="http://img.alicdn.com/imgextra/i4/1696191909/TB2EWxXbNvzQeBjSZFAXXaF9VXa_!!1696191909.jpg_60x60q90.jpg"
+								alt="商品预览图"></a></li>
+						<li class=""><a href="#"><img
+								src="http://img.alicdn.com/imgextra/i4/1696191909/TB2jLZ3bxvzQeBjSZFKXXXgXFXa_!!1696191909.jpg_60x60q90.jpg"
+								alt="商品预览图"></a></li>
+						<li class=""><a href="#"><img
+								src="http://img.alicdn.com/imgextra/i2/1696191909/TB2cREZbBPzQeBjSZFhXXbRpFXa_!!1696191909.jpg_60x60q90.jpg"
+								alt="商品预览图"></a></li>
+					</ul>
+					<p class="tm-action tm-clear">
+						<span id="J_EditItem"><a href="//jubao.taobao.com/index.htm?itemId=27304952752&amp;spm=a1z6q.7847058"
+							target="_blank">举报</a></span> <a id="J_IShare" class="iShare tm-event" href="#"><i></i>分享</a> <a id="J_AddFavorite"
+							href="javascript:;" data-aldurl="//ald.taobao.com/recommend.htm?appId=03136&amp;itemId=27304952752 "
+							class="favorite"><i></i><span>收藏商品</span></a> <span id="J_CollectCount">（8043人气）</span>
+					</p>
+					<ul class="tb-meta-icons">
+						<li title="该商品加入了“公益宝贝”计划"
+							href="//service.taobao.com/support/main/help_quick.htm?q=%25E4%25BB%2580%25E4%25B9%2588%25E6%2598%25AF%25E5%2585%25AC%25E7%259B%258A%25E5%25AE%259D%25E8%25B4%259D%25EF%25BC%259F"
+							style="width: 40px; height: 42px; background: transparent url(&quot;//img.alicdn.com/tps/i4/T18aVfFI0dXXcsE9Te-40-42.png&quot;) no-repeat scroll 0% 0%; margin-left: 5px; position: relative; top: 20px; display: block; float: left;"><a
+							href="//service.taobao.com/support/main/help_quick.htm?q=%25E4%25BB%2580%25E4%25B9%2588%25E6%2598%25AF%25E5%2585%25AC%25E7%259B%258A%25E5%25AE%259D%25E8%25B4%259D%25EF%25BC%259F"
+							title="该商品加入了“公益宝贝”计划" target="_blank"
+							style="width: 40px; height: 42px; display: block; position: absolute; top: 0px; left: 0px;"></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
