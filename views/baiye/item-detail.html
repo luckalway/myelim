@@ -1,13 +1,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-<% var widgets = ['baiye/item-detail']; %>
+<% var widgets = ['baiye/item-detail','baiye/detail-meta',]; %>
 <meta charset="UTF-8" />
 <title>Elim•以琳-窗帘O2O-互联网+</title>
 <% include ../include/script.html %>
 </head>
 <body>
 <% include ../include/header.html %>
+<div class="widget" style="width:1024px;margin:0 auto;">
+<% include ../../public/widget/baiye/detail-meta/main.html %>
+</div>
 <div class="widget" style="width:1024px;margin:0 auto;">
 <% include ../../public/widget/baiye/item-detail/main.html %>
 </div>
