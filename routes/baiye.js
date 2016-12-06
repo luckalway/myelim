@@ -63,7 +63,7 @@ router.get('/baiyes/:id', function(req, res, next) {
 				  }
 			});
 			body.images = images;
-			body.preview = BASE_UPLOAD_URL + req.params.id + '/preview.jpg';
+			body.preview = BASE_UPLOAD_URL + body.productId + '/preview.jpg';
 
 			res.render('baiye/item-detail', {
 				item : rectifyItem(body)

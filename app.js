@@ -52,7 +52,7 @@ app.use('/admin/', loginRoutes)
 
 // if can not find a available image
 app.get(/\/data\/.*\.jpg$/, function(req, res, next) {
-	var matchedArray =/.+\.jpg_([a-z]+)\.jpg$/.exec(req.url);  
+	var matchedArray =/.+\.jpg_(\w+)\.jpg$/.exec(req.url);  
 	var notFound = true;
 	if(matchedArray){
 		var imageType = matchedArray[1];
@@ -60,8 +60,13 @@ app.get(/\/data\/.*\.jpg$/, function(req, res, next) {
 		if(opts){
 			notFound = false; 
             jimp.read(conf.image.getOriginImageLocalPath(req.url), function (err, image) {
-                if (err) 
-                	throw err;
+                if (err) {
+                	console.error(err);
+            		var img404 = fs.readFileSync(ROOT_PATH+'/public/images/404/default.jpg');
+            		res.writeHead(200, {'Content-Type': 'image/jpg' });
+            		res.end(img404, 'binary');
+                	return;
+                }
                 
                 var width = opts.width < image.bitmap.width ? opts.width : image.bitmap.width;
                 image.resize(width, opts.height || jimp.AUTO).write(conf.image.getImageLocalPath(req.url), function(){

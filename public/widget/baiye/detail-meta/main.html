@@ -1,16 +1,11 @@
-
 <div id="detail">
 	<div id="J_DetailMeta" class="tm-detail-meta tm-clear" role="form">
 		<div class="tm-clear">
 			<div class="tb-property">
 				<div class="tb-wrap">
 					<div class="tb-detail-hd">
-						<h1>格丽斯防水百叶窗帘办公室卧室卷帘卫生间帘全遮光木百叶窗百叶帘</h1>
-						<p class="newp">新一循环系统 高轨省力系统 制作 防晒 防水</p>
-						<h4 class="tb-detail-sellpoint">
-							商家承诺：购买“上门安装”服务，如未履行服务最高可获得200元赔付<a class="tm-help" title="窗帘上门安装" target="_blank"
-								href="//www.tmall.com/wow/baihuo/act/chuanglian?spm=a220o.1000855.1000987.2.cpHwLg">?</a>
-						</h4>
+						<h1><%=item.title%></h1>
+						<p class="newp">不足一平米 按一平米计价 超出按 实际数量计价详询客服 定制产品非质量问题不退不换</p>
 					</div>
 					<!--引入normalBasic-->
 					<div class="tm-fcs-panel">
@@ -65,14 +60,14 @@
 										<div class="row">
 											<div class="col-sm-5">
 												<div class="input-group">
-													<span class="input-group-addon">宽</span> <input title="请输入窗户的宽度" value='100.0' type="text" class="form-control">
-													<span class="input-group-addon">厘米(cm)</span>
+													<span class="input-group-addon">宽</span> <input title="请输入窗户的宽度" value='100.0' type="text"
+														class="form-control"> <span class="input-group-addon">厘米(cm)</span>
 												</div>
 											</div>
 											<div class="col-sm-5">
 												<div class="input-group">
-													<span class="input-group-addon">高</span> <input  title="请输入窗户的高度" value='100.0'  type="text" class="form-control">
-													<span class="input-group-addon">厘米(cm)</span>
+													<span class="input-group-addon">高</span> <input title="请输入窗户的高度" value='100.0' type="text"
+														class="form-control"> <span class="input-group-addon">厘米(cm)</span>
 												</div>
 											</div>
 										</div>
@@ -104,7 +99,7 @@
 				<div class="tb-booth">
 					<a href="javascript:void(0);"><span class="ks-imagezoom-wrap"><img id="J_ImgBooth"
 							alt="格丽斯防水百叶窗帘办公室卧室卷帘卫生间帘全遮光木百叶窗百叶帘"
-							src="https://img.alicdn.com/imgextra/i2/TB1chvmNpXXXXbyXXXXXXXXXXXX_!!0-item_pic.jpg_430x430q90.jpg"
+							src="<%=item.preview%>_medium2.jpg"
 							data-haszoom="700"><span
 							style="position: absolute; top: 200.595px; left: 200.095px; width: 218.405px; height: 218.405px; display: none;"
 							class="ks-imagezoom-lens"></span></span> </a>
@@ -128,6 +123,7 @@
 				<p class="tm-action tm-clear">
 					<a id="J_IShare" class="iShare tm-event" href="#"><i></i>分享</a>
 				</p>
+
 			</div>
 		</div>
 	</div>

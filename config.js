@@ -15,6 +15,9 @@ exports.resizeVersion = {
         medium:{
             width:410
         },
+        medium2:{
+            width:430
+        },
         large: {
             width: 800
         }
@@ -42,6 +45,6 @@ exports.image = {
 		},
 		getOriginImageLocalPath:function(url){
 			var localPath = this.getImageLocalPath(url);
-			return localPath.replace(/_(thumbnail|smaller|small|medium|large)\.jpg$/,'');
+			return localPath.replace(/_(thumbnail|smaller|small|medium|large|medium2)\.jpg$/,'');
 		}
 }
